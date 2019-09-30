@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CalculatorCompadre</string>
+    <string name="primerNumero">First Number</string>
+    <string name="segundoNumero">Second Number</string>
+    <string name="sumar">Addition</string>
+    <string name="restar">Subtract</string>
+    <string name="dividir">Divide</string>
+    <string name="multiplicar">Multiply</string>
+    <string name="resolver">Calculate</string>
+    <string name="resultado">The solution is </string>
+</resources>

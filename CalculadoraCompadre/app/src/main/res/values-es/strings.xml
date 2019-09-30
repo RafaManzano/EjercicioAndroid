@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CalculadoraCompadre</string>
+    <string name="primerNumero">Primer Numero</string>
+    <string name="segundoNumero">Segundo Numero</string>
+    <string name="sumar">Sumar</string>
+    <string name="restar">Restar</string>
+    <string name="dividir">Dividir</string>
+    <string name="multiplicar">Multiplicar</string>
+    <string name="resolver">Calcular</string>
+    <string name="resultado">El resultado es </string>
+</resources>
