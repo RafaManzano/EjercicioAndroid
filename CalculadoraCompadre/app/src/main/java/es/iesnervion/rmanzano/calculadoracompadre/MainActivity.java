@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
 
         resultado = findViewById(R.id.resultado);
@@ -26,14 +26,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resolver(View view) {
+        //Hay que controlar cuando los numeros vienen nulos, Da error al parsear a Double
         Double res = 0.0;
+        Double num1 = 0.0;
+        Double num2 = 0.0;
         radioButtonSelected = radioGroup.getCheckedRadioButtonId();
         TextView primerNumero = findViewById(R.id.primerNumeroET);
         String n1 = primerNumero.getText().toString();
-        Double num1 = Double.parseDouble(n1);
+        if(n1.equals(null)) {
+            num1 = Double.parseDouble(n1);
+        }
+
         TextView segundoNumero = findViewById(R.id.segundoNumeroET);
         String n2 = segundoNumero.getText().toString();
-        Double num2 = Double.parseDouble(n2);
+        if(n2.equals(null)) {
+            num2 = Double.parseDouble(n2);
+        }
         switch (radioButtonSelected) {
             case R.id.sumar :
                 res = num1 + num2;
