@@ -28,7 +28,9 @@
             android:layout_column="0"
             android:layout_row="0"
             android:text="8"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="uno"/>
 
         <ImageButton
             android:id="@+id/dos"
@@ -37,7 +39,9 @@
             android:layout_column="1"
             android:layout_row="0"
             android:text="1"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="dos"/>
 
         <ImageButton
             android:id="@+id/tres"
@@ -46,7 +50,9 @@
             android:layout_column="2"
             android:layout_row="0"
             android:text="12"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="tres"/>
 
 
         <!---Los tres del medio -->
@@ -57,7 +63,9 @@
             android:layout_column="0"
             android:layout_row="1"
             android:text="8"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="cuatro"/>
 
         <ImageButton
             android:id="@+id/cinco"
@@ -66,7 +74,9 @@
             android:layout_column="1"
             android:layout_row="1"
             android:text="1"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="cinco"/>
 
         <ImageButton
             android:id="@+id/seis"
@@ -75,7 +85,9 @@
             android:layout_column="2"
             android:layout_row="1"
             android:text="12"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="seis"/>
 
         <!--- Los tres de abajo-->
         <ImageButton
@@ -85,7 +97,9 @@
             android:layout_column="0"
             android:layout_row="2"
             android:text="8"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="siete"/>
 
         <ImageButton
             android:id="@+id/ocho"
@@ -94,7 +108,9 @@
             android:layout_column="1"
             android:layout_row="2"
             android:text="1"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="ocho"/>
 
         <ImageButton
             android:id="@+id/nueve"
@@ -103,8 +119,32 @@
             android:layout_column="2"
             android:layout_row="2"
             android:text="12"
-            android:src="@drawable/ind"/>
+            android:background="@drawable/ind"
+            android:clickable="true"
+            android:onClick="nueve"/>
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/ganador"
+        android:layout_width="237dp"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="56dp"
+        android:textSize="25dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/turno"
+        android:layout_width="276dp"
+        android:layout_height="136dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="37dp"
+        android:textSize="30dp"
+        />
+
 
 </RelativeLayout>
