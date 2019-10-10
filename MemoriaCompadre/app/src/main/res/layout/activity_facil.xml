@@ -32,6 +32,7 @@
 
         <!-- Esta es la cabeza de la primera linea y columna -->
 
+        <!-- ib1 -->
         <ImageButton
             android:id="@+id/ib1"
             android:layout_width="57dp"
@@ -41,9 +42,11 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@+id/guiaStart"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ib5"
             app:layout_constraintVertical_chainStyle="spread"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <!-- ib2 -->
         <ImageButton
             android:id="@+id/ib2"
             android:layout_width="60dp"
@@ -52,9 +55,12 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/ib3"
             app:layout_constraintStart_toEndOf="@+id/ib1"
+            app:layout_constraintBottom_toTopOf="@id/ib6"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <!-- ib3 -->
         <ImageButton
             android:id="@+id/ib3"
             android:layout_width="60dp"
@@ -63,9 +69,12 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/ib4"
             app:layout_constraintStart_toEndOf="@+id/ib2"
+            app:layout_constraintBottom_toTopOf="@id/ib7"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <!-- ib4 -->
         <ImageButton
             android:id="@+id/ib4"
             android:layout_width="60dp"
@@ -74,37 +83,151 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintStart_toEndOf="@+id/ib3"
+            app:layout_constraintBottom_toTopOf="@id/ib8"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <!-- ib5 -->
+
+
 
         <ImageButton
             android:id="@+id/ib5"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/ib9"
+            app:layout_constraintEnd_toStartOf="@+id/ib6"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib1"
-            app:layout_constraintBottom_toTopOf="@id/ib9"/>
-            <!--app:layout_constraintEnd_toStartOf="@+id/ib6"-->
+            tools:srcCompat="@tools:sample/avatars" />
 
+        <!-- ib6 -->
 
+        <ImageButton
+        android:id="@+id/ib6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toEndOf="@+id/ib5"
+        app:layout_constraintTop_toBottomOf="@+id/ib2"
+        app:layout_constraintEnd_toStartOf="@+id/ib7"
+        app:layout_constraintBottom_toTopOf="@+id/ib10"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib7 -->
+        <ImageButton
+            android:id="@+id/ib7"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib6"
+            app:layout_constraintTop_toBottomOf="@+id/ib3"
+            app:layout_constraintEnd_toStartOf="@+id/ib8"
+            app:layout_constraintBottom_toTopOf="@+id/ib11"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib8 -->
+        <ImageButton
+            android:id="@+id/ib8"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib7"
+            app:layout_constraintTop_toBottomOf="@+id/ib4"
+            app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+            app:layout_constraintBottom_toTopOf="@+id/ib12"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib9 -->
         <ImageButton
             android:id="@+id/ib9"
             android:layout_width="60dp"
             android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="@id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib5"
-            app:layout_constraintBottom_toTopOf="@id/ib13"/>
-        <!--app:layout_constraintEnd_toStartOf="@+id/ib10"-->
+            app:layout_constraintEnd_toStartOf="@+id/ib10"
+            app:layout_constraintBottom_toTopOf="@id/ib13"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            tools:srcCompat="@tools:sample/avatars"/>
 
+        <!-- ib10 -->
+        <ImageButton
+            android:id="@+id/ib10"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib9"
+            app:layout_constraintTop_toBottomOf="@+id/ib6"
+            app:layout_constraintEnd_toStartOf="@+id/ib11"
+            app:layout_constraintBottom_toTopOf="@+id/ib14"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib11 -->
+        <ImageButton
+            android:id="@+id/ib11"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib10"
+            app:layout_constraintTop_toBottomOf="@+id/ib7"
+            app:layout_constraintEnd_toStartOf="@+id/ib12"
+            app:layout_constraintBottom_toTopOf="@+id/ib15"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib12 -->
+        <ImageButton
+            android:id="@+id/ib12"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib11"
+            app:layout_constraintTop_toBottomOf="@+id/ib8"
+            app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+            app:layout_constraintBottom_toTopOf="@+id/ib16"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib13 -->
+
+        <!-- ib14 -->
 
         <ImageButton
             android:id="@+id/ib13"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ib14"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@+id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib9"
-            app:layout_constraintBottom_toTopOf="parent"/>
-            <!--app:layout_constraintEnd_toStartOf="@+id/ib14"-->
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageButton
+            android:id="@+id/ib14"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib13"
+            app:layout_constraintTop_toBottomOf="@+id/ib10"
+            app:layout_constraintEnd_toStartOf="@+id/ib15"
+            app:layout_constraintBottom_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib15 -->
+        <ImageButton
+            android:id="@+id/ib15"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib14"
+            app:layout_constraintTop_toBottomOf="@+id/ib11"
+            app:layout_constraintEnd_toStartOf="@+id/ib16"
+            app:layout_constraintBottom_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <!-- ib16 -->
+        <ImageButton
+            android:id="@+id/ib16"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/ib15"
+            app:layout_constraintTop_toBottomOf="@+id/ib12"
+            app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
+            app:layout_constraintBottom_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars"/>
 
 
         <androidx.constraintlayout.widget.Guideline
