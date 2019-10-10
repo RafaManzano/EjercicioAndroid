@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".facilActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".facilActivity">
 
         <Chronometer
             android:id="@+id/chrono"
@@ -18,217 +14,221 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="64dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+
+
 
         <TextView
             android:id="@+id/puntuacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
-            android:layout_marginEnd="72dp"
+            android:layout_marginTop="264dp"
+            android:layout_marginEnd="48dp"
             android:text="Puntuacion:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Esta es la cabeza de la primera linea y columna -->
 
         <!-- ib1 -->
         <ImageButton
             android:id="@+id/ib1"
-            android:layout_width="57dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:layout_constraintEnd_toStartOf="@+id/ib2"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@+id/guiaStart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ib5"
             app:layout_constraintVertical_chainStyle="spread"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:clickable="true"
+            android:src="@drawable/card" />
 
         <!-- ib2 -->
         <ImageButton
             android:id="@+id/ib2"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/ib3"
             app:layout_constraintStart_toEndOf="@+id/ib1"
             app:layout_constraintBottom_toTopOf="@id/ib6"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/card" />
 
         <!-- ib3 -->
         <ImageButton
             android:id="@+id/ib3"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/ib4"
             app:layout_constraintStart_toEndOf="@+id/ib2"
             app:layout_constraintBottom_toTopOf="@id/ib7"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/card" />
 
         <!-- ib4 -->
         <ImageButton
             android:id="@+id/ib4"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintStart_toEndOf="@+id/ib3"
             app:layout_constraintBottom_toTopOf="@id/ib8"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/card" />
 
         <!-- ib5 -->
-
-
-
         <ImageButton
             android:id="@+id/ib5"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toTopOf="@id/ib9"
             app:layout_constraintEnd_toStartOf="@+id/ib6"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib1"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/card" />
 
         <!-- ib6 -->
-
         <ImageButton
-        android:id="@+id/ib6"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:layout_constraintStart_toEndOf="@+id/ib5"
-        app:layout_constraintTop_toBottomOf="@+id/ib2"
-        app:layout_constraintEnd_toStartOf="@+id/ib7"
-        app:layout_constraintBottom_toTopOf="@+id/ib10"
-        tools:srcCompat="@tools:sample/avatars"/>
+            android:id="@+id/ib6"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toEndOf="@+id/ib5"
+            app:layout_constraintTop_toBottomOf="@+id/ib2"
+            app:layout_constraintEnd_toStartOf="@+id/ib7"
+            app:layout_constraintBottom_toTopOf="@+id/ib10"
+            android:src="@drawable/card"/>
 
         <!-- ib7 -->
         <ImageButton
             android:id="@+id/ib7"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/ib6"
             app:layout_constraintTop_toBottomOf="@+id/ib3"
             app:layout_constraintEnd_toStartOf="@+id/ib8"
             app:layout_constraintBottom_toTopOf="@+id/ib11"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib8 -->
         <ImageButton
             android:id="@+id/ib8"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/ib7"
             app:layout_constraintTop_toBottomOf="@+id/ib4"
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintBottom_toTopOf="@+id/ib12"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib9 -->
         <ImageButton
             android:id="@+id/ib9"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="@id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib5"
             app:layout_constraintEnd_toStartOf="@+id/ib10"
             app:layout_constraintBottom_toTopOf="@id/ib13"
             app:layout_constraintHorizontal_chainStyle="spread"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib10 -->
         <ImageButton
             android:id="@+id/ib10"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/ib9"
             app:layout_constraintTop_toBottomOf="@+id/ib6"
             app:layout_constraintEnd_toStartOf="@+id/ib11"
             app:layout_constraintBottom_toTopOf="@+id/ib14"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib11 -->
         <ImageButton
             android:id="@+id/ib11"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/ib10"
             app:layout_constraintTop_toBottomOf="@+id/ib7"
             app:layout_constraintEnd_toStartOf="@+id/ib12"
             app:layout_constraintBottom_toTopOf="@+id/ib15"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib12 -->
         <ImageButton
             android:id="@+id/ib12"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@+id/ib11"
             app:layout_constraintTop_toBottomOf="@+id/ib8"
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintBottom_toTopOf="@+id/ib16"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:src="@drawable/card"/>
 
         <!-- ib13 -->
-
-        <!-- ib14 -->
-
         <ImageButton
             android:id="@+id/ib13"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ib14"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@+id/guiaStart"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/ib9"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/card" />
 
+        <!-- ib14 -->
         <ImageButton
             android:id="@+id/ib14"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ib15"
             app:layout_constraintStart_toEndOf="@+id/ib13"
             app:layout_constraintTop_toBottomOf="@+id/ib10"
-            app:layout_constraintEnd_toStartOf="@+id/ib15"
-            app:layout_constraintBottom_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:layout_marginTop="20dp"
+            android:src="@drawable/card" />
 
         <!-- ib15 -->
         <ImageButton
             android:id="@+id/ib15"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ib16"
             app:layout_constraintStart_toEndOf="@+id/ib14"
             app:layout_constraintTop_toBottomOf="@+id/ib11"
-            app:layout_constraintEnd_toStartOf="@+id/ib16"
-            app:layout_constraintBottom_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:layout_marginTop="20dp"
+            android:src="@drawable/card" />
 
         <!-- ib16 -->
         <ImageButton
             android:id="@+id/ib16"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintStart_toEndOf="@+id/ib15"
             app:layout_constraintTop_toBottomOf="@+id/ib12"
-            app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
-            app:layout_constraintBottom_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars"/>
-
+            android:layout_marginTop="20dp"
+            android:src="@drawable/card" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guiaEnd"
@@ -243,9 +243,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="16dp" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
