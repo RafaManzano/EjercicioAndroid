@@ -2,15 +2,15 @@ package es.iesnervion.rmanzano.memoriacompadre;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ObjectAnimator;
+
 import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class facilActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +32,10 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
     private ImageButton b16;
     private ImageButton cartaComparada1 = null;
     private ImageButton cartaComparada2 = null;
-    private int[] imagenes;
+    private Integer[] imagenes;
+    private ImageButton[] botones;
+    private String[] tags;
+    private Integer puntuacion;
 
 
     @Override
@@ -78,18 +81,28 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
         b15.setOnClickListener(this);
         b16.setOnClickListener(this);
 
-        imagenes {R.drawable.c}
+        imagenes = new Integer[]{R.drawable.uno, R.drawable.dos, R.drawable.tres, R.drawable.cuatro, R.drawable.cinco, R.drawable.seis, R.drawable.siete, R.drawable.ocho};
+        botones = new ImageButton[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16};
+        tags = new String [] {"uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho"};
+        puntuacion = 0;
+
+
     }
 
     @Override
     public void onClick(final View view) {
+
         //b1.setBackgroundResource(R.drawable.ic_launcher_background);
+        barajarCartas();
+        /*
         if(cartaComparada1 == null) {
             cartaComparada1 = (ImageButton)view;
         }
         else {
             cartaComparada2 = (ImageButton)view;
         }
+
+         */
         //final View v = view;
         //Con esto rotarias la carta para mostrarla
         view.animate().withLayer()
@@ -100,6 +113,7 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
                             @Override public void run() {
 
                                 //view.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                                view.setBackgroundResource(imagenes[conversionStringNumero(view.getTag().toString())]);
 
                                 // second quarter turn
                                 view.setRotationY(-90);
@@ -110,6 +124,24 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                 ).start();
+
+
+        //Comprobar las cartas para ganar
+        if(cartaComparada1 == null) {
+            cartaComparada1 = (ImageButton)view;
+        }
+        else {
+            cartaComparada2 = (ImageButton)view;
+            if(compararCartas(cartaComparada1, cartaComparada2)) {
+                puntuacion += 10;
+                TextView punt = findViewById(R.id.puntuacion);
+                //punt.setText(punt.getText());
+            }
+            else {
+                cartaComparada1 = null;
+                cartaComparada2 = null;
+            }
+        }
 
          //view.setBackgroundResource(R.drawable.ic_launcher_foreground);
 
@@ -126,12 +158,130 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
     E/S: No hay
     Postcondiciones:Asociado al nombre. Se devuelve true cuando las cartas son iguales y false cuando no lo son
      */
-    public boolean compararCartas(ImageButton p1, ImageButton p2) {
+    public boolean compararCartas(final ImageButton p1, final ImageButton p2) {
         boolean igual = false;
         if(p1.getTag().toString().equals(p2.getTag().toString())) {
             igual = true;
+            p1.setClickable(false);
+            p2.setClickable(false);
+        }
+        else {
+            p1.animate().withLayer()
+                    .rotationY(90)
+                    .setDuration(300)
+                    .withEndAction(
+                            new Runnable() {
+                                @Override public void run() {
+
+                                    //view.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                                    p1.setBackgroundResource(R.drawable.card);
+
+                                    // second quarter turn
+                                    p1.setRotationY(-90);
+                                    p1.animate().withLayer()
+                                            .rotationY(0)
+                                            .setDuration(300)
+                                            .start();
+                                }
+                            }
+                    ).start();
+
+            p2.animate().withLayer()
+                    .rotationY(90)
+                    .setDuration(300)
+                    .withEndAction(
+                            new Runnable() {
+                                @Override public void run() {
+
+                                    //view.setBackgroundResource(R.drawable.ic_launcher_foreground);
+                                    p2.setBackgroundResource(R.drawable.card);
+
+                                    // second quarter turn
+                                    p2.setRotationY(-90);
+                                    p2.animate().withLayer()
+                                            .rotationY(0)
+                                            .setDuration(300)
+                                            .start();
+                                }
+                            }
+                    ).start();
+           //p1.setBackgroundResource(R.drawable.card);
+           //p2.setBackgroundResource(R.drawable.card);
         }
         return igual;
     }
 
+    /*
+
+    */
+    public void barajarCartas() {
+        Random random = new Random();
+        int numero = 0;
+        for (int i = 0; i < botones.length; i++) {
+            numero = random.nextInt(8);
+            botones[i].setTag(tags[numero]);
+            if(arrayRepetidos(botones[i].getTag().toString())) {
+                botones[i].setTag("");
+                i--;
+            }
+            //else {
+
+            //}
+
+        }
+    }
+
+
+    public boolean arrayRepetidos(String numero) {
+        boolean encontrado = false;
+        int repeticiones = 0;
+
+        for (int i = 0; i < botones.length && encontrado == false; i++)
+            if (botones[i].getTag().toString().equals(numero)) {
+                repeticiones++;
+                if (repeticiones == 3) {
+                    encontrado = true;
+                }
+            }
+
+        return encontrado;
+    }
+
+    public int conversionStringNumero(String tag) {
+        int numero = 0;
+        switch (tag) {
+            case "uno":
+                numero = 0;
+            break;
+
+            case "dos":
+                numero = 1;
+            break;
+
+            case "tres":
+                numero = 2;
+            break;
+
+            case "cuatro":
+                numero = 3;
+            break;
+
+            case "cinco":
+                numero = 4;
+            break;
+
+            case "seis":
+                numero = 5;
+            break;
+
+            case "siete":
+                numero = 6;
+            break;
+
+            case "ocho":
+                numero = 7;
+            break;
+        }
+        return numero;
+    }
 }

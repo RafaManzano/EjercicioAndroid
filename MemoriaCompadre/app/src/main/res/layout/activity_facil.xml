@@ -45,6 +45,7 @@
             app:layout_constraintBottom_toTopOf="@id/ib5"
             app:layout_constraintVertical_chainStyle="spread"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib2 -->
@@ -58,6 +59,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib3 -->
@@ -71,6 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib4 -->
@@ -84,6 +87,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib5 -->
@@ -98,6 +102,7 @@
             app:layout_constraintStart_toStartOf="@id/guiaStart"
             app:layout_constraintTop_toBottomOf="@id/ib1"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib6 -->
@@ -111,6 +116,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ib7"
             app:layout_constraintBottom_toTopOf="@+id/ib10"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib7 -->
@@ -124,6 +130,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ib8"
             app:layout_constraintBottom_toTopOf="@+id/ib11"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib8 -->
@@ -137,6 +144,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintBottom_toTopOf="@+id/ib12"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib9 -->
@@ -151,6 +159,7 @@
             app:layout_constraintBottom_toTopOf="@id/ib13"
             app:layout_constraintHorizontal_chainStyle="spread"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib10 -->
@@ -164,6 +173,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ib11"
             app:layout_constraintBottom_toTopOf="@+id/ib14"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib11 -->
@@ -177,6 +187,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ib12"
             app:layout_constraintBottom_toTopOf="@+id/ib15"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib12 -->
@@ -190,6 +201,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guiaEnd"
             app:layout_constraintBottom_toTopOf="@+id/ib16"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card"/>
 
         <!-- ib13 -->
@@ -204,6 +216,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/ib9"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib14 -->
@@ -217,6 +230,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ib10"
             android:layout_marginTop="20dp"
             android:clickable="true"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib15 -->
@@ -230,6 +244,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ib11"
             android:clickable="true"
             android:layout_marginTop="20dp"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <!-- ib16 -->
@@ -243,6 +258,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ib12"
             android:clickable="true"
             android:layout_marginTop="20dp"
+            android:tag="cero"
             android:background="@drawable/card" />
 
         <androidx.constraintlayout.widget.Guideline
