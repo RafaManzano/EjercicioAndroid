@@ -8,11 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_launcher_background"/>
+
     <TextView
         android:id="@+id/nombreEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"/>
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/conferencia"
