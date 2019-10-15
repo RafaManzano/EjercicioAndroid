@@ -15,6 +15,7 @@ import es.iesnervion.rmanzano.nbateams.ViewHolder.ViewHolder;
 import es.iesnervion.rmanzano.nbateams.Clases.Equipo;
 
 public class Adaptador extends ArrayAdapter <Equipo>{
+    private ArrayList<Equipo> equipos;
 
     /*
     private Integer[] images;
@@ -32,12 +33,12 @@ public class Adaptador extends ArrayAdapter <Equipo>{
     }
 
     */
-    public Adaptador(Context c, ArrayList<Equipo> e) {
-        super(c,0, e);
+    public Adaptador(Context c, int textViewResourceId, ArrayList<Equipo> e) {
+        super(c,textViewResourceId, e);
+        equipos = e;
     }
 
-    public View getView(int position, View convertView,
-                        ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         ViewHolder holder;
         ImageView imagen;
@@ -61,7 +62,7 @@ public class Adaptador extends ArrayAdapter <Equipo>{
 
         holder.getNombre().setText(e.getNombre());
         holder.getConferencia().setText(e.getConferencia());
-        holder.getImagen().setBackgroundResource(R.drawable.ic_launcher_background);
+        holder.getImagen().setBackgroundResource(e.getImagen());
 
         return row;
     }
