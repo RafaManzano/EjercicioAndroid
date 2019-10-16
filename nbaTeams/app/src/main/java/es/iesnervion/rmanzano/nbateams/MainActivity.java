@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ import es.iesnervion.rmanzano.nbateams.Adaptadores.Adaptador;
 import es.iesnervion.rmanzano.nbateams.Clases.Equipo;
 import es.iesnervion.rmanzano.nbateams.Metodos.Metodos;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements AdapterView.OnItemClickListener {
 
     /*private Integer[] images;
     private String[] nombres;
@@ -45,10 +48,18 @@ public class MainActivity extends ListActivity {
                 "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE"};
 
          */
-
+        ListView lv = getListView();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //setListAdapter(new Adaptador(this, R.layout.rowequipo, images, nombres, conferencias));
         setListAdapter(new Adaptador(this, R.layout.rowequipo, equipos));
+        lv.setOnItemClickListener(this);
+
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
 }

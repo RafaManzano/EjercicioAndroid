@@ -51,7 +51,7 @@ public class Adaptador extends ArrayAdapter <Equipo>{
             row=LayoutInflater.from(getContext()).inflate(R.layout.rowequipo, parent, false);
 
             nombre = row.findViewById(R.id.nombreEquipo);
-            imagen = row.findViewById(R.id.icon);
+            imagen = row.findViewById(R.id.icono);
             conferencia = row.findViewById(R.id.conferencia);
             holder = new ViewHolder (imagen,nombre, conferencia);
             row.setTag(holder);
