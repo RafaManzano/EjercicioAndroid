@@ -3,6 +3,7 @@ package es.iesnervion.rmanzano.nbateams.Metodos;
 import java.util.ArrayList;
 
 import es.iesnervion.rmanzano.nbateams.Clases.Equipo;
+import es.iesnervion.rmanzano.nbateams.Clases.Jugador;
 import es.iesnervion.rmanzano.nbateams.R;
 
 public class Metodos {
@@ -39,5 +40,38 @@ public class Metodos {
         equipos.add(new Equipo(R.drawable.phx, "Phoenix Suns", "WE"));
         equipos.add(new Equipo(R.drawable.sac, "Sacramento Kings", "WE"));
         return equipos;
+    }
+
+    public static ArrayList<Jugador> rellenarArrayListJugadores(int idEquipo, ArrayList<Jugador> jugadores) {
+
+        ArrayList jugadoresEquipo = new ArrayList<Jugador>();
+        //Atlanta Hawks
+
+        for(Object j : jugadores) {
+            Jugador jug = (Jugador) j;
+            if(jug.getIdEquipo() == idEquipo) {
+                jugadoresEquipo.add(jug);
+            }
+
+        }
+        return jugadoresEquipo;
+    }
+
+    public static ArrayList<Jugador> crearInicializarJugadores() {
+        ArrayList todosJugadores = new ArrayList<Jugador>();
+        //Atlanta Hawks
+        todosJugadores.add(new Jugador(0, "Trae Young", "B", R.drawable.once));
+        todosJugadores.add(new Jugador(0, "John Collins", "A", R.drawable.veinte));
+        todosJugadores.add(new Jugador(0, "DeAndre Bembry", "A", R.drawable.noventaycinco));
+        todosJugadores.add(new Jugador(0, "DeAndre Hunter", "A", R.drawable.doce));
+        todosJugadores.add(new Jugador(0, "Jabari Parker", "A", R.drawable.cinco));
+
+        //Charlotte Hornets
+        todosJugadores.add(new Jugador(1, "Miles Bridges", "A", R.drawable.cero));
+        todosJugadores.add(new Jugador(1, "Dwayne Bacon", "B", R.drawable.siete));
+        todosJugadores.add(new Jugador(1, "Terry Rozier", "B", R.drawable.tres));
+        todosJugadores.add(new Jugador(1, "PJ Washington", "A", R.drawable.venticinco));
+        todosJugadores.add(new Jugador(1, "Devonte Graham", "B", R.drawable.cuatro));
+        return  todosJugadores;
     }
 }

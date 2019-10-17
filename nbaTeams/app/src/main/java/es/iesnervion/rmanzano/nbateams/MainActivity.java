@@ -3,6 +3,7 @@ package es.iesnervion.rmanzano.nbateams;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,9 +49,9 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
                 "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE", "WE"};
 
          */
-        ListView lv = getListView();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ListView lv = getListView();
         //setListAdapter(new Adaptador(this, R.layout.rowequipo, images, nombres, conferencias));
         setListAdapter(new Adaptador(this, R.layout.rowequipo, equipos));
         lv.setOnItemClickListener(this);
@@ -59,6 +60,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(getApplicationContext(), JugadorActivity.class);
+        intent.putExtra("id", i);
+        startActivity(intent);
+
+
 
     }
 
