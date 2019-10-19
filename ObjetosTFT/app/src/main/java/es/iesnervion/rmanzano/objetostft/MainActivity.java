@@ -16,46 +16,54 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import es.iesnervion.rmanzano.objetostft.clases.Metodos;
 import es.iesnervion.rmanzano.objetostft.clases.Objeto;
+import es.iesnervion.rmanzano.objetostft.clases.ObjetoFinal;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList objetos = new ArrayList<Objeto>();
     private ArrayList objetosString = new ArrayList<String>();
+    private ArrayList objetosCompletos = new ArrayList<ObjetoFinal>();
+    private Spinner spinner;
+    private AutoCompleteTextView auto;
+    private TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Objetos Adapter Personalizado para el Spinner
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Espadon"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Arco Curvo"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Vara Innecesariamente Grande"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Lagrima de la Diosa"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Chaleco de cadenas"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Capa Negatron"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Cinturon de Gigante"));
-        objetos.add(new Objeto(R.drawable.ic_launcher_background, "Espatula"));
+        //ArrayList de Objetos para Spinner
+        objetos = Metodos.paraSpinner();
 
-        //Array Adapter para el AutoCompleteTextView
-        objetosString.add("Espadon");
-        objetosString.add("Arco Curvo");
-        objetosString.add("Vara Innecesariamente Grande");
-        objetosString.add("Lagrima de la Diosa");
-        objetosString.add("Chaleco de cadenas");
-        objetosString.add("Capa Negatron");
-        objetosString.add("Cinturon de Gigante");
-        objetosString.add("Espatula");
+
+        //ArrayList de String para AutoCompleteTextView
+        objetosString = Metodos.paraAutoComplete();
+
+        //ArrayList de ObjetoFinal para facilitar la impresion del objeto completo
+        objetosCompletos = Metodos.paraTextos();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Adapter adapter = new Adapter(objetos);
-        Spinner spinner = findViewById(R.id.spinner);
-        AutoCompleteTextView auto = findViewById(R.id.edit);
+        spinner = findViewById(R.id.spinner);
+        auto = findViewById(R.id.edit);
         spinner.setAdapter(adapter);
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
                 android.R.layout.select_dialog_item, objetosString);
         auto.setThreshold(1);
         auto.setAdapter(adaptador);
-
+        tv = findViewById(R.id.descripcion);
 
 
     }
+
+    public void fusion(View view) {
+        Objeto o1 = (Objeto) spinner.getSelectedItem();
+        String o2 = auto.getText().toString();
+
+        //Hacer un metodo que no te deje poner lo que quieras
+        tv.setText(o1.getNombre() + "      " + o2);
+        tv.setVisibility(1);
+    }
+
+
 
     //Adaptador del Spinner
     public class Adapter extends BaseAdapter implements SpinnerAdapter {

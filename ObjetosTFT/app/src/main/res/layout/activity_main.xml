@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         />
 
     <AutoCompleteTextView
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mas"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:ems="10"/>
 
     <TextView
@@ -34,9 +34,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="+"
-        android:textSize="60dp"/>
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/aplicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplicar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
+        android:onClick="fusion"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -53,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagen"
+        app:layout_constraintTop_toBottomOf="@id/aplicar"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp"
         android:visibility="invisible"/>
