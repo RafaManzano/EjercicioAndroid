@@ -26,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList objetosCompletos = new ArrayList<ObjetoFinal>();
     private Spinner spinner;
     private AutoCompleteTextView auto;
-    private TextView tv;
+    private TextView titulo;
+    private TextView descripcion;
+    private ImageView imagen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //ArrayList de Objetos para Spinner
@@ -49,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.select_dialog_item, objetosString);
         auto.setThreshold(1);
         auto.setAdapter(adaptador);
-        tv = findViewById(R.id.descripcion);
+        descripcion = findViewById(R.id.descripcion);
+        imagen = findViewById(R.id.imagen);
+        titulo = findViewById(R.id.tituloObjeto);
 
 
     }
@@ -58,9 +63,42 @@ public class MainActivity extends AppCompatActivity {
         Objeto o1 = (Objeto) spinner.getSelectedItem();
         String o2 = auto.getText().toString();
 
-        //Hacer un metodo que no te deje poner lo que quieras
-        tv.setText(o1.getNombre() + "      " + o2);
-        tv.setVisibility(1);
+        if(textoNoValido(o2)) {
+            titulo.setText("No es correcto");
+            titulo.setVisibility(View.VISIBLE);
+            descripcion.setText("Ese objeto no esta disponible");
+            descripcion.setVisibility(View.VISIBLE);
+            imagen.setBackgroundResource(R.drawable.ic_launcher_background);
+            imagen.setVisibility(View.VISIBLE);
+        }
+       else {
+           for(Object o : objetosCompletos) {
+               ObjetoFinal oF = (ObjetoFinal) o;
+
+               if(oF.getPrimerObjeto().equalsIgnoreCase(o1.getNombre()) && oF.getSegundoObjeto().equalsIgnoreCase(o2)) {
+                   titulo.setText(oF.getObjetoFinal());
+                   titulo.setVisibility(View.VISIBLE);
+                   descripcion.setText(oF.getDescripcion());
+                   descripcion.setVisibility(View.VISIBLE);
+                   imagen.setBackgroundResource(oF.getImagen());
+                   imagen.setVisibility(View.VISIBLE);
+               }
+           }
+        }
+    }
+
+
+    public boolean textoNoValido(String texto) {
+        boolean fallido = true;
+
+        for(int i = 0; i < objetosString.size() && fallido == true; i++) {
+
+            if(objetosString.get(i).toString().equals(texto)) {
+                fallido = false;
+            }
+        }
+
+        return fallido;
     }
 
 
