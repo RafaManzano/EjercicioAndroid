@@ -93,7 +93,7 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(final View view) {
 
         //b1.setBackgroundResource(R.drawable.ic_launcher_background);
-        barajarCartas();
+        //barajarCartas();
         /*
         if(cartaComparada1 == null) {
             cartaComparada1 = (ImageButton)view;
@@ -127,6 +127,7 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
 
 
         //Comprobar las cartas para ganar
+        /*
         if(cartaComparada1 == null) {
             cartaComparada1 = (ImageButton)view;
         }
@@ -144,7 +145,7 @@ public class facilActivity extends AppCompatActivity implements View.OnClickList
         }
 
          //view.setBackgroundResource(R.drawable.ic_launcher_foreground);
-
+    */
     }
 
     /*
