@@ -1,14 +1,14 @@
 package iesnervion.rmanzano.compadredise;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.animation.Animator;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
@@ -23,7 +23,8 @@ public class Juego extends AppCompatActivity implements View.OnClickListener {
     Drawable d;
     Drawable base;
     MediaPlayer mp;
-    Animation an;
+    private static int ocasiones = 1;
+    //Animation an;
 
 
     @Override
@@ -54,9 +55,9 @@ public class Juego extends AppCompatActivity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         empezarMusica(mp);
-        realizarTransicion();
-        realizarTransicion();
-        realizarTransicion();
+        realizarTransicion(3);
+        //realizarTransicion();
+        //realizarTransicion();
         //empezarMusica(mp);
     }
 
@@ -82,11 +83,57 @@ public class Juego extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
-    public void realizarTransicion() {
-        //Sirve para hacer la transicion de la foto imagen a otra
+    public void realizarTransicion(int veces) {
         Random random = new Random();
-        //for (int i = 0; i < veces; i++) {
+        final ImageButton b = botones[random.nextInt(botones.length)];
+        b.animate().setListener(new Animator.AnimatorListener() {
+    @Override
+    public void onAnimationStart(Animator animation) {
+
+        TransitionDrawable td = new TransitionDrawable(new Drawable[]{
+                base,
+                d//Imagen 2
+        });
+        b.setImageDrawable(td);
+        td.startTransition(5000);
+        td.reverseTransition(5000);
+        ocasiones++;
+    }
+
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        realizarTransicion(ocasiones);
+    }
+
+    @Override
+    public void onAnimationCancel(Animator animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animator animation) {
+
+    }
+});
+        /*
+        final Random random = new Random();
+        ImageButton b = botones[random.nextInt(botones.length)];
+        TransitionDrawable td = new TransitionDrawable(new Drawable[]{
+                base,
+                d//Imagen 2
+        });
+        b.setImageDrawable(td);
+        td.startTransition(5000);
+        td.reverseTransition(5000);
+        ocasiones++;
+        if(isFinishing()) {
+            realizarTransicion(ocasiones);
+        }
+        */
+
+        /*
+        Random random = new Random();
+        for(int i = 0; i < veces; i++) {
             ImageButton b = botones[random.nextInt(botones.length)];
             TransitionDrawable td = new TransitionDrawable(new Drawable[]{
                     base,
@@ -95,9 +142,68 @@ public class Juego extends AppCompatActivity implements View.OnClickListener {
             b.setImageDrawable(td);
             td.startTransition(5000);
             td.reverseTransition(5000);
-            //td.setCrossFadeEnabled(false);
-       // }
+            TransitionSet ts = new TransitionSet();
+            ts.setStartDelay(1000);
+        }
+        */
     }
+/*
+    public void realizarTransicion(final int veces) {
+        //Sirve para hacer la transicion de la foto imagen a otra
+        Transition transition = getWindow().getSharedElementEnterTransition();
+        transition.addTarget(android.R.transition.slide_top);
+        transition.addListener(new Transition.TransitionListener() {
+
+            Random random = new Random();
+
+            @Override
+            public void onTransitionStart(Transition transition) {
+                ImageButton b = botones[random.nextInt(botones.length)];
+                TransitionDrawable td = new TransitionDrawable(new Drawable[]{
+                        base,
+                        d//Imagen 2
+                });
+                b.setImageDrawable(td);
+                td.startTransition(5000);
+                td.reverseTransition(5000);
+                ocasiones++;
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                if (ocasiones <= veces) {
+                    realizarTransicion(veces);
+                }
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+        });
+
+
+        //td.setCrossFadeEnabled(false);
+            /*
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+             */
+
+
+    //}
 
     public void empezarMusica(MediaPlayer mp) {
         //MediaPlayer mp = MediaPlayer.create(this, R.raw.musica);
@@ -108,3 +214,27 @@ public class Juego extends AppCompatActivity implements View.OnClickListener {
         }
     }
 }
+
+/*
+AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
+            animationDrawable.setOneShot(true);
+            animationDrawable.start();
+
+    Animation animation = AnimationUtils.loadAnimation(YourActivity.this, android.R.anim.fade_in);
+
+    imageView.setAnimation(animation);
+        animation.start();
+        animation.setAnimationListener(new Animation.AnimationListener() {
+          @Override
+          public void onAnimationStart(Animation animation) {
+          }
+          @Override
+          public void onAnimationEnd(Animation animation) {
+              Animation fadeOut = AnimationUtils.loadAnimation(YourActivity.this, android.R.anim.fade_out);
+              imageView.startAnimation(fadeOut);
+          }
+          @Override
+          public void onAnimationRepeat(Animation animation) {
+          }
+});
+ */
