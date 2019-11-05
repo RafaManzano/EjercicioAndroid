@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.tensorflow.lite.Interpreter;
+import org.tensorflow.lite.Tensor;
+import org.tensorflow.lite.TensorFlowLite;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -17,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private TextView mVoiceInputTv;
     private ImageButton mSpeakBtn;
+    File file = new File("/home/rmanzano/Descargas/conv_actions_tfile/conv_actions_frozen.tfile");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "¿Hola, quieres que te ayude a algo?");
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
-        } catch (ActivityNotFoundException a) {
-
+        }
+        catch (ActivityNotFoundException a) {
+            a.printStackTrace();
         }
     }
 
@@ -51,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
-                if (resultCode == RESULT_OK && null != data) {
+                if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     mVoiceInputTv.setText(result.get(0));
+
                 }
                 break;
             }
