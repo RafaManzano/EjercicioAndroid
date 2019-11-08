@@ -7,91 +7,170 @@
     tools:context=".JuegoActivity">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/equipo1"
-        android:visibility="invisible"/>
+        android:layout_width="106dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="108dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/equipo2"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/golLocal"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/golVisitante"
-        android:visibility="invisible"/>
+        android:layout_width="99dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="36dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Gol"
         android:id="@+id/local"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="328dp"
+        android:text="+"
+        app:layout_constraintEnd_toStartOf="@+id/amarillaLocal"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="sumaGolLocal"/>
+
+    <TextView
+        android:id="@+id/golVisitante"
+        android:layout_width="59dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="0"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipo2" />
+
+    <TextView
+        android:id="@+id/golLocal"
+        android:layout_width="57dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="40dp"
+        android:text="0"
+        android:textSize="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipo1" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Gol"
         android:id="@+id/visitante"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="328dp"
+        android:text="+"
+        app:layout_constraintStart_toEndOf="@+id/rojaLocal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="sumaGolVisitante"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tarjeta Amarilla"
         android:id="@+id/amarillaLocal"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:text="A"
+        android:foreground="#FFFF00"
+        app:layout_constraintTop_toTopOf="@+id/local"
+        app:layout_constraintStart_toEndOf="@id/local"
+        tools:layout_editor_absoluteX="62dp" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tarjeta Amarilla"
         android:id="@+id/amarillaVisitante"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:text="A"
+        android:foreground="#FFFF00"
+        app:layout_constraintStart_toEndOf="@+id/visitante"
+        app:layout_constraintTop_toTopOf="@+id/visitante" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tarjeta Roja"
         android:id="@+id/rojaLocal"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:text="R"
+        android:foreground="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/amarillaLocal"
+        app:layout_constraintTop_toTopOf="@+id/local" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tarjeta Roja"
         android:id="@+id/rojaVisitante"
-        android:visibility="invisible"/>
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:text="R"
+        android:foreground="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/amarillaVisitante"
+        app:layout_constraintTop_toTopOf="@+id/amarillaVisitante" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Iniciar"
         android:id="@+id/iniciar"
-        android:visibility="invisible"/>
+        android:layout_width="126dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="656dp"
+        android:text="Iniciar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Parar"
         android:id="@+id/parar"
-        android:visibility="invisible"/>
+        android:layout_width="142dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="52dp"
+        android:text="Parar"
+        app:layout_constraintStart_toEndOf="@+id/iniciar"
+        app:layout_constraintTop_toTopOf="@+id/iniciar" />
 
     <Chronometer
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/chrono"
+        android:layout_width="409dp"
+        android:layout_height="64dp"
         android:countDown="true"
-        android:id="@+id/chrono"/>
+        android:textAlignment="center"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <ListView
+        android:id="@+id/listaLocal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/local"
+        />
+
+    <ListView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/listaVisitante"
+        app:layout_constraintTop_toBottomOf="@id/visitante"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnFaltasLocal"
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:text="F"
+        android:onClick="faltaLocal"
+        app:layout_constraintStart_toEndOf="@id/rojaLocal"
+        app:layout_constraintTop_toTopOf="@id/local" />
+
+    <Button
+        android:id="@+id/btnFaltasVisitante"
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:onClick="faltaVisitante"
+        android:text="F"
+        app:layout_constraintStart_toEndOf="@id/rojaVisitante"
+        app:layout_constraintTop_toTopOf="@id/visitante" />
 
 
 
