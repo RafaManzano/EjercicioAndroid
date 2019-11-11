@@ -1,5 +1,7 @@
 package es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel;
 
+import android.os.SystemClock;
+
 import androidx.lifecycle.ViewModel;
 
 public class PartidoViewModel extends ViewModel {
@@ -7,12 +9,14 @@ public class PartidoViewModel extends ViewModel {
     private Integer golVisitante;
     private Integer faltaLocal;
     private Integer faltaVisitante;
+    //private Long chrono;
 
     public PartidoViewModel() {
         golLocal = 0;
         golVisitante = 0;
         faltaLocal = 0;
         faltaVisitante = 0;
+        //chrono = 1200000L;
     }
 
     public Integer getGolLocal() {
@@ -46,4 +50,15 @@ public class PartidoViewModel extends ViewModel {
     public void setFaltaVisitante(Integer faltaVisitante) {
         this.faltaVisitante = faltaVisitante;
     }
+
+    /*
+    public Long getChrono() {
+        return chrono;
+    }
+
+    public void setChrono(Long chrono) {
+        this.chrono = chrono;
+    }
+    */
+
 }

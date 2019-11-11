@@ -44,7 +44,7 @@
         android:layout_height="69dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
-        android:text="0"
+        android:text=""
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equipo2" />
@@ -55,7 +55,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="40dp"
-        android:text="0"
+        android:text=""
         android:textSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/equipo1" />
@@ -115,6 +115,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="656dp"
         android:text="Iniciar"
+        android:onClick="iniciarCronometro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,16 +123,16 @@
         android:id="@+id/parar"
         android:layout_width="142dp"
         android:layout_height="56dp"
+        android:onClick="pararCronometro"
         android:layout_marginStart="52dp"
         android:text="Parar"
         app:layout_constraintStart_toEndOf="@+id/iniciar"
         app:layout_constraintTop_toTopOf="@+id/iniciar" />
 
-    <Chronometer
-        android:id="@+id/chrono"
+    <TextView
+        android:id="@+id/mTextViewCountDown"
         android:layout_width="409dp"
         android:layout_height="64dp"
-        android:countDown="true"
         android:textAlignment="center"
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,9 +173,20 @@
         app:layout_constraintStart_toEndOf="@id/rojaVisitante"
         app:layout_constraintTop_toTopOf="@id/visitante" />
 
+    <TextView
+        android:id="@+id/numeroFaltaLocal"
+        android:layout_width="31dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toEndOf="@+id/golLocal"
+        app:layout_constraintTop_toBottomOf="@+id/golLocal" />
 
-
-
+    <TextView
+        android:id="@+id/numeroFaltaVisitante"
+        android:layout_width="31dp"
+        android:layout_height="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/golVisitante"
+        app:layout_constraintTop_toBottomOf="@+id/golVisitante" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

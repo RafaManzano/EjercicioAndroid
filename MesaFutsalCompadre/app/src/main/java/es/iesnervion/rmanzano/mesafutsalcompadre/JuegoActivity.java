@@ -4,15 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel.PartidoViewModel;
 
 
-public class JuegoActivity extends AppCompatActivity implements View.OnClickListener {
+public class JuegoActivity extends AppCompatActivity {
+    private static final long START_TIME_IN_MILLIS = 1200000;
 
     private String equipo1;
     private String equipo2;
@@ -24,6 +28,13 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     private TextView golVisitante;
     private TextView faltaL;
     private TextView faltaV;
+    //private Long tiempoParado = Long.valueOf(0);
+   // private Long diferencia = Long.valueOf(0);
+    private CountDownTimer mCountDownTimer;
+    private TextView mTextViewCountDown;
+
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
     //private Button locales;
 
 
@@ -38,6 +49,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         golLocal = findViewById(R.id.golLocal);
         golVisitante = findViewById(R.id.golVisitante);
         Bundle extras = getIntent().getExtras();
+
         //locales = findViewById(R.id.local);
         //SystemClock.setCurrentTimeMillis(1200000);
 
@@ -45,17 +57,18 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         equipo2 = extras.getString("j2");
         nombreEquipo1.setText(equipo1);
         nombreEquipo2.setText(equipo2);
-        faltaL = findViewById(R.id.faltasLocal);
-        faltaV = findViewById(R.id.faltasLocal);
+        faltaL = findViewById(R.id.numeroFaltaLocal);
+        faltaV = findViewById(R.id.numeroFaltaVisitante);
         //Cronometro
-        chrono = findViewById(R.id.chrono);
+        mTextViewCountDown = findViewById(R.id.mTextViewCountDown);
 
         //chrono.base
-        chrono.setBase(SystemClock.elapsedRealtime() + 1200000);
+        //chrono.setBase(SystemClock.elapsedRealtime() + 1200000);
 
         //chrono.setCountDown(true);
         //chrono.start();
         viewModel = ViewModelProviders.of(this).get(PartidoViewModel.class);
+        mostrarNumerosViewModel();
 
         //locales.setOnClickListener(this);
 
@@ -82,6 +95,41 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         faltaV.setText(viewModel.getFaltaVisitante().toString());
     }
 
+    public void iniciarCronometro(View view) {
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                //viewModel.setChrono(millisUntilFinished);
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+        //chrono.setBase(viewModel.getChrono() + diferencia);
+        //chrono.start();
+    }
+
+    public void pararCronometro(View view) {
+        mCountDownTimer.cancel();
+        //tiempoParado = SystemClock.elapsedRealtime();
+        //chrono.stop();
+        //viewModel.setChrono(chrono.getBase());
+    }
+
+    private void updateCountDownText() {
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        mTextViewCountDown.setText(timeLeftFormatted);
+    }
+
+    /*
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -100,6 +148,25 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnFaltasVisitante:
                 faltaVisitante(v);
             break;
+
+            case R.id.iniciar:
+                iniciarCronometro(v);
+            break;
+
+            case R.id.parar:
+                pararCronometro(v);
+            break;
         }
     }
+    */
+
+
+    public void mostrarNumerosViewModel() {
+        golLocal.setText(viewModel.getGolLocal().toString());
+        golVisitante.setText(viewModel.getGolVisitante().toString());
+        faltaL.setText(viewModel.getFaltaLocal().toString());
+        faltaV.setText(viewModel.getFaltaVisitante().toString());
+        //mTextViewCountDown.setText(viewModel.);
+    }
+
 }
