@@ -5,11 +5,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Chronometer;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel.PartidoViewModel;
@@ -32,6 +37,7 @@ public class JuegoActivity extends AppCompatActivity {
    // private Long diferencia = Long.valueOf(0);
     private CountDownTimer mCountDownTimer;
     private TextView mTextViewCountDown;
+    private ListView equipoLocalTarjetas;
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
@@ -41,6 +47,9 @@ public class JuegoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ArrayList<Fila> filas = new ArrayList<Fila>();
+        filas.add(new Fila(R.drawable.amarilla, "7"));
+        filas.add(new Fila(R.drawable.roja, "2"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
         viewModel = new PartidoViewModel();
@@ -48,6 +57,7 @@ public class JuegoActivity extends AppCompatActivity {
         nombreEquipo2 = findViewById(R.id.equipo2);
         golLocal = findViewById(R.id.golLocal);
         golVisitante = findViewById(R.id.golVisitante);
+        equipoLocalTarjetas = findViewById(R.id.listaLocal);
         Bundle extras = getIntent().getExtras();
 
         //locales = findViewById(R.id.local);
@@ -59,6 +69,8 @@ public class JuegoActivity extends AppCompatActivity {
         nombreEquipo2.setText(equipo2);
         faltaL = findViewById(R.id.numeroFaltaLocal);
         faltaV = findViewById(R.id.numeroFaltaVisitante);
+        Adaptador adapter = new Adaptador(filas);
+        equipoLocalTarjetas.setAdapter(adapter);
         //Cronometro
         mTextViewCountDown = findViewById(R.id.mTextViewCountDown);
 
@@ -167,6 +179,90 @@ public class JuegoActivity extends AppCompatActivity {
         faltaL.setText(viewModel.getFaltaLocal().toString());
         faltaV.setText(viewModel.getFaltaVisitante().toString());
         //mTextViewCountDown.setText(viewModel.);
+    }
+
+    /*
+        Lista heterogenea
+     */
+
+    public class Adaptador extends BaseAdapter {
+        private ArrayList<Fila> filas;
+        private Fila fila;
+
+        public Adaptador(ArrayList<Fila> filas) {
+            this.filas = filas;
+        }
+
+        @Override
+        public int getCount() {
+            return filas.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return filas.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        /*
+        @Override
+        public int getItemViewType(int position) {
+            int lugar = 0;
+            if((Fila)getItem(position).getFoto() == R.drawable.amarilla) {
+                lugar = 1;
+            }
+            return lugar;
+        }
+        */
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            ViewHolder holder;
+            TextView texto;
+            ImageView imagen;
+            fila = (Fila) getItem(position);
+
+
+            if(row == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                row = inflater.inflate(R.layout.row, parent, false);
+                texto = row.findViewById(R.id.texto);
+                imagen = row.findViewById(R.id.imagen);
+                holder = new ViewHolder(imagen, texto);
+                row.setTag(holder);
+            }
+            else {
+                holder = (ViewHolder) row.getTag();
+            }
+            holder.getImagen().setBackgroundResource(fila.getFoto());
+            holder.getNombre().setText(fila.getTexto());
+
+            return row;
+
+        }
+    }
+
+    public class ViewHolder {
+        ImageView imagen;
+        TextView texto;
+
+        public ViewHolder(ImageView imagen, TextView texto) {
+            this.imagen = imagen;
+            this.texto = texto;
+        }
+
+        public ImageView getImagen() {
+            return imagen;
+        }
+
+        public TextView getNombre() {
+            return texto;
+        }
     }
 
 }
