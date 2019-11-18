@@ -15,8 +15,10 @@ public class PartidoViewModel extends ViewModel {
     private Integer golVisitante;
     private Integer faltaLocal;
     private Integer faltaVisitante;
-    ArrayList<Fila> filas = new ArrayList<>();
-    private MutableLiveData<ArrayList<Fila>> tarjetasAmarillas;
+    ArrayList<Fila> filasLocal = new ArrayList<>();
+    ArrayList<Fila> filasVisitante = new ArrayList<>();
+    private MutableLiveData<ArrayList<Fila>> tarjetasLocales;
+    private MutableLiveData<ArrayList<Fila>> tarjetasVisitantes;
     //private Long chrono;
 
     public PartidoViewModel() {
@@ -24,7 +26,8 @@ public class PartidoViewModel extends ViewModel {
         golVisitante = 0;
         faltaLocal = 0;
         faltaVisitante = 0;
-        tarjetasAmarillas = new MutableLiveData<>();
+        tarjetasLocales = new MutableLiveData<>();
+        tarjetasVisitantes = new MutableLiveData<>();
         //filas = new ArrayList<Fila>();
         //f0.ilas.add(new Fila())
         //chrono = 1200000L;
@@ -62,13 +65,22 @@ public class PartidoViewModel extends ViewModel {
         this.faltaVisitante = faltaVisitante;
     }
 
-    public MutableLiveData<ArrayList<Fila>> getTarjetasAmarillas() {
-        return tarjetasAmarillas;
+    public MutableLiveData<ArrayList<Fila>> getTarjetasLocales() {
+        return tarjetasLocales;
     }
 
-    public void anhadirTarjetaAmarilla(Fila fila) {
-        filas.add(fila);
-        tarjetasAmarillas.setValue(filas);
+    public MutableLiveData<ArrayList<Fila>> getTarjetasVisitantes() {
+        return tarjetasVisitantes;
+    }
+
+    public void anhadirTarjetaLocal(Fila fila) {
+        filasLocal.add(fila);
+        tarjetasLocales.setValue(filasLocal);
+    }
+
+    public void anhadirTarjetaVisitante(Fila fila) {
+        filasVisitante.add(fila);
+        tarjetasVisitantes.setValue(filasVisitante);
     }
 
 

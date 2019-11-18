@@ -16,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,7 +31,7 @@ import es.iesnervion.rmanzano.mesafutsalcompadre.Fragmentos.DorsalDialog;
 import es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel.PartidoViewModel;
 
 
-public class JuegoActivity extends AppCompatActivity {
+public class JuegoActivity extends AppCompatActivity implements View.OnClickListener {
     //Para la actividad
     private String equipo1;
     private String equipo2;
@@ -39,7 +41,12 @@ public class JuegoActivity extends AppCompatActivity {
     private TextView golVisitante;
     private TextView faltaL;
     private TextView faltaV;
-    private ListView equipoLocalTarjetas;
+    private ListView equipoLocalTarjetas; //ListView de equipo local
+    private ListView equipoVisitanteTarjetas; //ListView de equipo visitante
+    private Button taLocal;
+    private Button trLocal;
+    private Button taVisitante;
+    private Button trVisitante;
 
     //ViewModel
     private PartidoViewModel viewModel;
@@ -76,9 +83,14 @@ public class JuegoActivity extends AppCompatActivity {
         nombreEquipo2 = findViewById(R.id.equipo2);
         golLocal = findViewById(R.id.golLocal);
         golVisitante = findViewById(R.id.golVisitante);
-        equipoLocalTarjetas = findViewById(R.id.listaLocal);
+        equipoLocalTarjetas = findViewById(R.id.listaLocal); //ListView de tarjetas locales
+        equipoVisitanteTarjetas = findViewById(R.id.listaVisitante); //ListView de tarjetas visitante
         faltaL = findViewById(R.id.numeroFaltaLocal);
         faltaV = findViewById(R.id.numeroFaltaVisitante);
+        taLocal = findViewById(R.id.amarillaLocal);
+        trLocal = findViewById(R.id.rojaLocal);
+        taVisitante = findViewById(R.id.amarillaVisitante);
+        trVisitante= findViewById(R.id.rojaVisitante);
 
 
         //Con esto realizamos un Intent Explicito y recogemos los datos de la otra actividad
@@ -100,7 +112,7 @@ public class JuegoActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(PartidoViewModel.class);
 
 
-        viewModel.getTarjetasAmarillas().observe(this, new Observer<ArrayList<Fila>>() {
+        viewModel.getTarjetasLocales().observe(this, new Observer<ArrayList<Fila>>() {
                     @Override
                     //Si entra en este metodo quiere decir que hay un cambio para notificar
                     public void onChanged(ArrayList<Fila> filas) {
@@ -110,48 +122,85 @@ public class JuegoActivity extends AppCompatActivity {
                     }
                 });
 
+        viewModel.getTarjetasVisitantes().observe(this, new Observer<ArrayList<Fila>>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(ArrayList<Fila> filas) {
+                //Se usa el adaptador
+                Adaptador adapter = new Adaptador(filas);
+                equipoVisitanteTarjetas.setAdapter(adapter);
+            }
+        });
+
 
 
 
         mostrarNumerosViewModel(); //Con este metodo retornamos lo correcto cuando hay un cambio de configuracion
 
+        //Para los botones de las tarjetas
+        taLocal.setOnClickListener(this);
+        trLocal.setOnClickListener(this);
+        taVisitante.setOnClickListener(this);
+        trVisitante.setOnClickListener(this);
 
     }
+
+
     //ESTO ES UN DIALOG FRAGMENT
     //SE QUE NO DEBE IR AQUI PERO ES COMO FUNCIONA
     public class DorsalDialog extends DialogFragment {
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(Bundle savedInstanceState, final Fila fila, final boolean local) {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(JuegoActivity.this);
             // Get the layout inflater
             final LayoutInflater inflater = JuegoActivity.this.getLayoutInflater();
             final View texto = inflater.inflate(R.layout.alertdialog, null);
+            //dorsal.setText("0");
+            //if(Integer.getInteger(dorsal.getText().toString()) < 1 || Integer.getInteger(dorsal.getText().toString()) > 99) {
+                //builder.setCancelable(false);
+                //builder.setMessage("Solo valen dorsales del 1 al 99");
+            //}
             //builder.
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(texto)
+                builder.setView(texto)
 
-                    // Add action buttons
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            //texto = inflater.inflate(R.layout.alertdialog, null);
-                            dorsal = texto.findViewById(R.id.etDorsal);
-                            fila = new Fila(R.drawable.amarilla,  dorsal.getText().toString());
-                            //Le queda anhadir el viewModel
-                            //ArrayList<Fila> filas = viewModel.getFilas().getValue();
-                            //filas.add(fila);
-                            viewModel.anhadirTarjetaAmarilla(fila);
-                            //viewModel.getFilas().add(fila);
-                        }
-                    })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                        // Add action buttons
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dorsal = texto.findViewById(R.id.etDorsal);
+                                fila.setTexto(dorsal.getText().toString());
+
+                                //Mirar mas validaciones y posibilidad de un metodo
+                                if(dorsal.getText().toString().matches("\\D*")) {
+                                    Toast.makeText(JuegoActivity.this, "El dorsal solo son numeros", Toast.LENGTH_LONG).show();
+                                }
+
+                                else if(Integer.parseInt(fila.getTexto()) < 1 || Integer.parseInt(fila.getTexto()) > 99) {
+                                    //dialog.cancel();
+                                    Toast.makeText(JuegoActivity.this, "El dorsal tiene que ser de 1 a 99", Toast.LENGTH_LONG).show();
+
+                                }
+                                else if(local) {
+                                    viewModel.anhadirTarjetaLocal(fila);
+                                    }
+                                    else {
+                                        viewModel.anhadirTarjetaVisitante(fila);
+                                    }
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+           // }
+            //while(Integer.getInteger(dorsal.getText().toString()) < 1 || Integer.getInteger(dorsal.getText().toString()) > 99);
+
             return builder.create();
+
         }
     }
 
@@ -188,14 +237,38 @@ public class JuegoActivity extends AppCompatActivity {
     }
 
     /*
-    Con este metodo mostramos el dialog para poder elegir un dorsal
-     */
+    Aqui hacemos los onClick para las listas y no tener repetidos los dialogs
+    */
+ @Override
+    public void onClick(View view) {
+     DorsalDialog dd = new DorsalDialog();
+        switch (view.getId()) {
+            case R.id.amarillaLocal:
+                dd.onCreateDialog(Bundle.EMPTY, new Fila(R.drawable.amarilla, "0"), true).show();
+                break;
+
+            case R.id.rojaLocal:
+                dd.onCreateDialog(Bundle.EMPTY, new Fila(R.drawable.roja, "0"), true).show();
+                break;
+
+            case R.id.amarillaVisitante:
+                dd.onCreateDialog(Bundle.EMPTY, new Fila(R.drawable.amarilla, "0"), false).show();
+                break;
+
+            case R.id.rojaVisitante:
+                dd.onCreateDialog(Bundle.EMPTY, new Fila(R.drawable.roja, "0"), false).show();
+                break;
+        }
+
+
+    }
+    /*
     public void botonAmarilla(View v) {
         DorsalDialog dd = new DorsalDialog();
         dd.onCreateDialog(Bundle.EMPTY).show();
 
     }
-
+    */
     /*
     Con este metodo al pulsar en el boton iniciar, empezaria el cronometro
      */
