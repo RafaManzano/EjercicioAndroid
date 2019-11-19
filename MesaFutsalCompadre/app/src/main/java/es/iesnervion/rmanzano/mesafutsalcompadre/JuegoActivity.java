@@ -41,6 +41,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     private TextView golVisitante;
     private TextView faltaL;
     private TextView faltaV;
+    private TextView periodo;
     private ListView equipoLocalTarjetas; //ListView de equipo local
     private ListView equipoVisitanteTarjetas; //ListView de equipo visitante
     private Button taLocal;
@@ -91,6 +92,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         trLocal = findViewById(R.id.rojaLocal);
         taVisitante = findViewById(R.id.amarillaVisitante);
         trVisitante= findViewById(R.id.rojaVisitante);
+        periodo = findViewById(R.id.periodo);
 
 
         //Con esto realizamos un Intent Explicito y recogemos los datos de la otra actividad
@@ -112,6 +114,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         viewModel = ViewModelProviders.of(this).get(PartidoViewModel.class);
 
 
+        //Con esto se crea la lista de tarjetas del equipo local
         viewModel.getTarjetasLocales().observe(this, new Observer<ArrayList<Fila>>() {
                     @Override
                     //Si entra en este metodo quiere decir que hay un cambio para notificar
@@ -122,6 +125,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
 
+        //Con esto se crea la lista de tarjetas del equipo visitante
         viewModel.getTarjetasVisitantes().observe(this, new Observer<ArrayList<Fila>>() {
             @Override
             //Si entra en este metodo quiere decir que hay un cambio para notificar
@@ -135,6 +139,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
         mostrarNumerosViewModel(); //Con este metodo retornamos lo correcto cuando hay un cambio de configuracion
 
         //Para los botones de las tarjetas
@@ -142,6 +148,50 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         trLocal.setOnClickListener(this);
         taVisitante.setOnClickListener(this);
         trVisitante.setOnClickListener(this);
+
+    }
+
+    //Para cambiar la parte, por defecto, es la primera
+    public void cambioParte(View view) {
+        viewModel = new PartidoViewModel();
+        golLocal.setText(viewModel.getGolLocal().toString());
+        golVisitante.setText(viewModel.getGolVisitante().toString());
+        faltaL.setText(viewModel.getFaltaLocal().toString());
+        faltaV.setText(viewModel.getFaltaVisitante().toString());
+        equipoLocalTarjetas.setAdapter(null);
+        equipoVisitanteTarjetas.setAdapter(null);
+
+        viewModel.setFilasLocal(new ArrayList<Fila>());
+        viewModel.setFilasVisitante(new ArrayList<Fila>());
+        /*
+        //Con esto se crea la lista de tarjetas del equipo local
+        viewModel.getTarjetasLocales().observe(this, new Observer<ArrayList<Fila>>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(ArrayList<Fila> filas) {
+                //Se usa el adaptador
+                Adaptador adapter = new Adaptador(filas);
+                equipoLocalTarjetas.setAdapter(adapter);
+            }
+        });
+
+        //Con esto se crea la lista de tarjetas del equipo visitante
+        viewModel.getTarjetasVisitantes().observe(this, new Observer<ArrayList<Fila>>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(ArrayList<Fila> filas) {
+                //Se usa el adaptador
+                Adaptador adapter = new Adaptador(filas);
+                equipoVisitanteTarjetas.setAdapter(adapter);
+            }
+        });
+        */
+    if(periodo.getText().toString().equalsIgnoreCase("1")) {
+        periodo.setText("2");
+    }
+    else {
+        periodo.setText("1");
+    }
 
     }
 
@@ -174,7 +224,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                                 fila.setTexto(dorsal.getText().toString());
 
                                 //Mirar mas validaciones y posibilidad de un metodo
-                                if(dorsal.getText().toString().matches("\\D*")) {
+                                if(dorsal.getText().toString().matches(".*\\D.*")) {
                                     Toast.makeText(JuegoActivity.this, "El dorsal solo son numeros", Toast.LENGTH_LONG).show();
                                 }
 
@@ -259,8 +309,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 dd.onCreateDialog(Bundle.EMPTY, new Fila(R.drawable.roja, "0"), false).show();
                 break;
         }
-
-
     }
     /*
     public void botonAmarilla(View v) {

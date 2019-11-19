@@ -83,5 +83,21 @@ public class PartidoViewModel extends ViewModel {
         tarjetasVisitantes.setValue(filasVisitante);
     }
 
+    public ArrayList<Fila> getFilasLocal() {
+        return filasLocal;
+    }
 
+    public void setFilasLocal(ArrayList<Fila> filasLocal) {
+        this.filasLocal = filasLocal;
+        tarjetasLocales.postValue(filasLocal);
+    }
+
+    public ArrayList<Fila> getFilasVisitante() {
+        return filasVisitante;
+    }
+
+    public void setFilasVisitante(ArrayList<Fila> filasVisitante) {
+        this.filasVisitante = filasVisitante;
+        tarjetasVisitantes.postValue(filasVisitante);
+    }
 }
