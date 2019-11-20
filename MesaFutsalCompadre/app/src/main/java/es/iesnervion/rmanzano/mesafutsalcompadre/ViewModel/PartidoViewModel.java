@@ -19,7 +19,8 @@ public class PartidoViewModel extends ViewModel {
     ArrayList<Fila> filasVisitante = new ArrayList<>();
     private MutableLiveData<ArrayList<Fila>> tarjetasLocales;
     private MutableLiveData<ArrayList<Fila>> tarjetasVisitantes;
-    //private Long chrono;
+    private String cronometro;
+    private String periodo;
 
     public PartidoViewModel() {
         golLocal = 0;
@@ -28,9 +29,8 @@ public class PartidoViewModel extends ViewModel {
         faltaVisitante = 0;
         tarjetasLocales = new MutableLiveData<>();
         tarjetasVisitantes = new MutableLiveData<>();
-        //filas = new ArrayList<Fila>();
-        //f0.ilas.add(new Fila())
-        //chrono = 1200000L;
+        cronometro = "20:00";
+        periodo = "1";
     }
 
     public Integer getGolLocal() {
@@ -69,9 +69,18 @@ public class PartidoViewModel extends ViewModel {
         return tarjetasLocales;
     }
 
+    public void setTarjetasLocales(MutableLiveData<ArrayList<Fila>> tarjetasLocales) {
+        this.tarjetasLocales = tarjetasLocales;
+    }
+
+
     public MutableLiveData<ArrayList<Fila>> getTarjetasVisitantes() {
         return tarjetasVisitantes;
     }
+    public void setTarjetasVisitantes(MutableLiveData<ArrayList<Fila>> tarjetasVisitantes) {
+        this.tarjetasVisitantes = tarjetasVisitantes;
+    }
+
 
     public void anhadirTarjetaLocal(Fila fila) {
         filasLocal.add(fila);
@@ -83,21 +92,20 @@ public class PartidoViewModel extends ViewModel {
         tarjetasVisitantes.setValue(filasVisitante);
     }
 
-    public ArrayList<Fila> getFilasLocal() {
-        return filasLocal;
+
+    public String getCronometro() {
+        return cronometro;
     }
 
-    public void setFilasLocal(ArrayList<Fila> filasLocal) {
-        this.filasLocal = filasLocal;
-        tarjetasLocales.postValue(filasLocal);
+    public void setCronometro(String cronometro) {
+        this.cronometro = cronometro;
     }
 
-    public ArrayList<Fila> getFilasVisitante() {
-        return filasVisitante;
+    public String getPeriodo() {
+        return periodo;
     }
 
-    public void setFilasVisitante(ArrayList<Fila> filasVisitante) {
-        this.filasVisitante = filasVisitante;
-        tarjetasVisitantes.postValue(filasVisitante);
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
     }
 }

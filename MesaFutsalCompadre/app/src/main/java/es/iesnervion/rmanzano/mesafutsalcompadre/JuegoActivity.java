@@ -3,6 +3,7 @@ package es.iesnervion.rmanzano.mesafutsalcompadre;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -32,6 +33,8 @@ import es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel.PartidoViewModel;
 
 
 public class JuegoActivity extends AppCompatActivity implements View.OnClickListener {
+    //HAY DOS ERRORES, CUANDO HACES UN CAMBIO DE CONFIGURACION NO SE MANTIENE EL TEXTO DEL BOTON
+    //SE MANTIENEN LOS DATOS INTRODUCIDOS EN LAS LISTAS
     //Para la actividad
     private String equipo1;
     private String equipo2;
@@ -153,44 +156,35 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
 
     //Para cambiar la parte, por defecto, es la primera
     public void cambioParte(View view) {
-        viewModel = new PartidoViewModel();
-        golLocal.setText(viewModel.getGolLocal().toString());
-        golVisitante.setText(viewModel.getGolVisitante().toString());
-        faltaL.setText(viewModel.getFaltaLocal().toString());
-        faltaV.setText(viewModel.getFaltaVisitante().toString());
+        //viewModel = new PartidoViewModel();
+
+        //ViewModel
+        viewModel.setGolLocal(0);
+        viewModel.setGolVisitante(0);
+        viewModel.setFaltaLocal(0);
+        viewModel.setFaltaVisitante(0);
+        viewModel.setCronometro("20:00");
+        viewModel.setTarjetasLocales(new MutableLiveData<ArrayList<Fila>>());
+        viewModel.setTarjetasVisitantes(new MutableLiveData<ArrayList<Fila>>());
+
+        //Visual
+        golLocal.setText("0");
+        golVisitante.setText("0");
+        faltaL.setText("0");
+        faltaV.setText("0");
+        mTextViewCountDown.setText("20:00");
         equipoLocalTarjetas.setAdapter(null);
         equipoVisitanteTarjetas.setAdapter(null);
 
-        viewModel.setFilasLocal(new ArrayList<Fila>());
-        viewModel.setFilasVisitante(new ArrayList<Fila>());
-        /*
-        //Con esto se crea la lista de tarjetas del equipo local
-        viewModel.getTarjetasLocales().observe(this, new Observer<ArrayList<Fila>>() {
-            @Override
-            //Si entra en este metodo quiere decir que hay un cambio para notificar
-            public void onChanged(ArrayList<Fila> filas) {
-                //Se usa el adaptador
-                Adaptador adapter = new Adaptador(filas);
-                equipoLocalTarjetas.setAdapter(adapter);
-            }
-        });
-
-        //Con esto se crea la lista de tarjetas del equipo visitante
-        viewModel.getTarjetasVisitantes().observe(this, new Observer<ArrayList<Fila>>() {
-            @Override
-            //Si entra en este metodo quiere decir que hay un cambio para notificar
-            public void onChanged(ArrayList<Fila> filas) {
-                //Se usa el adaptador
-                Adaptador adapter = new Adaptador(filas);
-                equipoVisitanteTarjetas.setAdapter(adapter);
-            }
-        });
-        */
     if(periodo.getText().toString().equalsIgnoreCase("1")) {
-        periodo.setText("2");
+        //viewModel.setGolLocal(viewModel.getGolLocal() + 1);
+        //golLocal.setText(viewModel.getGolLocal().toString());
+        viewModel.setPeriodo("2");
+        periodo.setText(viewModel.getPeriodo());
     }
     else {
-        periodo.setText("1");
+        viewModel.setPeriodo("1");
+        periodo.setText(viewModel.getPeriodo());
     }
 
     }
@@ -356,9 +350,9 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
 
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        viewModel.setCronometro(String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds));
 
-        mTextViewCountDown.setText(timeLeftFormatted);
+        mTextViewCountDown.setText(viewModel.getCronometro());
     }
 
 
@@ -370,7 +364,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         golVisitante.setText(viewModel.getGolVisitante().toString());
         faltaL.setText(viewModel.getFaltaLocal().toString());
         faltaV.setText(viewModel.getFaltaVisitante().toString());
-        //mTextViewCountDown.setText(viewModel.);
+        mTextViewCountDown.setText(viewModel.getCronometro());
+        periodo.setText(viewModel.getPeriodo());
     }
 
     /*
