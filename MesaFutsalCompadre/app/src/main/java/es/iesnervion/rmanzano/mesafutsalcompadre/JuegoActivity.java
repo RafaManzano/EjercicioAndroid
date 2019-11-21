@@ -33,8 +33,7 @@ import es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel.PartidoViewModel;
 
 
 public class JuegoActivity extends AppCompatActivity implements View.OnClickListener {
-    //HAY DOS ERRORES, CUANDO HACES UN CAMBIO DE CONFIGURACION NO SE MANTIENE EL TEXTO DEL BOTON
-    //SE MANTIENEN LOS DATOS INTRODUCIDOS EN LAS LISTAS
+
     //Para la actividad
     private String equipo1;
     private String equipo2;
@@ -159,22 +158,22 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         //viewModel = new PartidoViewModel();
 
         //ViewModel
-        viewModel.setGolLocal(0);
-        viewModel.setGolVisitante(0);
+        //viewModel.setGolLocal(0);
+        //viewModel.setGolVisitante(0);
         viewModel.setFaltaLocal(0);
         viewModel.setFaltaVisitante(0);
         viewModel.setCronometro("20:00");
-        viewModel.setTarjetasLocales(new MutableLiveData<ArrayList<Fila>>());
-        viewModel.setTarjetasVisitantes(new MutableLiveData<ArrayList<Fila>>());
+        //viewModel.setTarjetasLocales(new MutableLiveData<ArrayList<Fila>>());
+        //viewModel.setTarjetasVisitantes(new MutableLiveData<ArrayList<Fila>>());
 
         //Visual
-        golLocal.setText("0");
-        golVisitante.setText("0");
+        //golLocal.setText("0");
+        //golVisitante.setText("0");
         faltaL.setText("0");
         faltaV.setText("0");
         mTextViewCountDown.setText("20:00");
-        equipoLocalTarjetas.setAdapter(null);
-        equipoVisitanteTarjetas.setAdapter(null);
+        //equipoLocalTarjetas.setAdapter(null);
+        //equipoVisitanteTarjetas.setAdapter(null);
 
     if(periodo.getText().toString().equalsIgnoreCase("1")) {
         //viewModel.setGolLocal(viewModel.getGolLocal() + 1);
@@ -188,7 +187,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     }
-
 
     //ESTO ES UN DIALOG FRAGMENT
     //SE QUE NO DEBE IR AQUI PERO ES COMO FUNCIONA
@@ -355,6 +353,27 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         mTextViewCountDown.setText(viewModel.getCronometro());
     }
 
+    //Para finalizar el encuentro e irte a otro
+    public void finalizarPartido(View view) {
+        //ViewModel
+        viewModel.setGolLocal(0);
+        viewModel.setGolVisitante(0);
+        viewModel.setFaltaLocal(0);
+        viewModel.setFaltaVisitante(0);
+        viewModel.setCronometro("20:00");
+        viewModel.setTarjetasLocales(new MutableLiveData<ArrayList<Fila>>());
+        viewModel.setTarjetasVisitantes(new MutableLiveData<ArrayList<Fila>>());
+
+        //Visual
+        golLocal.setText("0");
+        golVisitante.setText("0");
+        faltaL.setText("0");
+        faltaV.setText("0");
+        mTextViewCountDown.setText("20:00");
+        equipoLocalTarjetas.setAdapter(null);
+        equipoVisitanteTarjetas.setAdapter(null);
+        finish();
+    }
 
     /*
         Con este metodo cuando hay un cambio de configuracion, mostraremos los valores guardados en ViewModel
@@ -369,10 +388,10 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /*
-        Es la clase Adaptador para la lista, De momento solo tarjetas amarillas equipo local
+        Es la clase Adaptador para las listas
      */
 
-    public class Adaptador extends BaseAdapter {
+    private class Adaptador extends BaseAdapter {
         private ArrayList<Fila> filas;
         private Fila fila;
 
@@ -427,7 +446,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     /*
     La clase ViewHolder, para poder hacer el reciclado
      */
-    public class ViewHolder {
+    private class ViewHolder {
         ImageView imagen;
         TextView texto;
 

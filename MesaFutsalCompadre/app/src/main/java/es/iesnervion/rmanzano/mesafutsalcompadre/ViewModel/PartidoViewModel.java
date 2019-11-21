@@ -1,12 +1,12 @@
 package es.iesnervion.rmanzano.mesafutsalcompadre.ViewModel;
 
-import android.os.SystemClock;
+
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import es.iesnervion.rmanzano.mesafutsalcompadre.Fila;
 
