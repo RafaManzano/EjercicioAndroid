@@ -133,10 +133,11 @@
         android:id="@+id/mTextViewCountDown"
         android:layout_width="409dp"
         android:layout_height="64dp"
+        android:layout_marginTop="32dp"
         android:textAlignment="center"
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
