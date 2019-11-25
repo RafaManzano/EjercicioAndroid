@@ -50,13 +50,13 @@ public class Pokemon extends Fragment implements  View.OnClickListener {
     @Override
     public void onClick(View v) {
         int punto = 0;
-       String respuesta = et.getText().toString();
-       if(respuesta.equalsIgnoreCase(tv.getText().toString())) {
-           //Aqui guardar en el viewModel
-           punto++;
-       }
+        String respuesta = et.getText().toString();
+        if(respuesta.equalsIgnoreCase(tv.getText().toString())) {
+            //Aqui guardar en el viewModel
+            punto++;
+        }
 
-       onDestroy();
+        getFragmentManager().beginTransaction().remove(this).commit();
 
     }
 }
