@@ -34,19 +34,8 @@
         android:layout_height="57dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pokemon"
-        app:layout_constraintTop_toBottomOf="@+id/imagen" />
-
-    <TextView
-        android:id="@+id/pokemon"
-        android:layout_width="196dp"
-        android:layout_height="69dp"
-        android:text="SHINX"
-        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@id/resolver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/escribir" />
+        app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
     <Button
         android:id="@+id/resolver"
@@ -57,6 +46,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon" />
+        app:layout_constraintTop_toBottomOf="@+id/escribir" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
