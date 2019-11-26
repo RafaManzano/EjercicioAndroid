@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/descubiertos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="POKEMON ENCONTRADOS :"
@@ -117,7 +118,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:background="#66FFFFFF"/>
+        android:background="#66FFFFFF"
+        android:id="@+id/puntuacion"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

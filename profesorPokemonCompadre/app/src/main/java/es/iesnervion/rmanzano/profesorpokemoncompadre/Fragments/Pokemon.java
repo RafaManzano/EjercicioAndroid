@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import java.util.Random;
 
@@ -64,11 +65,14 @@ public class Pokemon extends Fragment implements  View.OnClickListener {
             vm.setPunto(vm.getPunto()+1);
         }
 
+        vm.setPokemon(vm.getPokemon() - 1);
+
         //Quitar de aqui, excede de sus competencias
+        //De momento se queda aqui hasta acabar el programa
         getFragmentManager().beginTransaction().remove(this).commit();
 
         //Puede ser tambien el cambio por el ViewModel
-        //botonPulsado.shinx
+        //Podemos usar con MutableLiveData y observar el dato en caso de cambio
 
     }
 

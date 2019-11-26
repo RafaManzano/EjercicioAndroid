@@ -2,6 +2,7 @@ package es.iesnervion.rmanzano.profesorpokemoncompadre;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.AyudaDialogFragment;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.Pokemon;
+import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.ViewModel;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button b1;
@@ -22,7 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button b6;
     private Button b7;
     private TextView pokemons;
-    //private TextView
+    private TextView puntuacion;
+    private ViewModel vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b5 = findViewById(R.id.boton5);
         b6 = findViewById(R.id.boton6);
         b7 = findViewById(R.id.boton7);
+        pokemons = findViewById(R.id.descubiertos);
+        puntuacion = findViewById(R.id.puntuacion);
         b1.setOnClickListener(this);
         b2.setOnClickListener(this);
         b3.setOnClickListener(this);
@@ -43,6 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b5.setOnClickListener(this);
         b6.setOnClickListener(this);
         b7.setOnClickListener(this);
+
+        //viewModel
+        vm = new ViewModel();
+        //vm = ViewModelProviders.
+        pokemons.setText(pokemons.getText() + " " + vm.getPokemon());
+        puntuacion.setText(puntuacion.getText() + " " + vm.getPunto());
+        //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
     }
 
     public void ayuda(View view) {
