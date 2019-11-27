@@ -1,19 +1,16 @@
 package es.iesnervion.rmanzano.profesorpokemoncompadre;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.TextView;
 
-import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.AyudaDialogFragment;
-import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.Pokemon;
-import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.ViewModel;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.*;
+import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button b1;
