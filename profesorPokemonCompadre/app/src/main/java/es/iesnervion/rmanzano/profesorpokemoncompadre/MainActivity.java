@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b7.setOnClickListener(this);
 
         //viewModel
-        vm = new ViewModel();
-        //vm = ViewModelProviders.
+
         pokemons.setText(pokemons.getText() + " " + vm.getPokemon());
         puntuacion.setText(puntuacion.getText() + " " + vm.getPunto());
         //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         PokemonFragment pok = new PokemonFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
         view.setClickable(false);
         pokemons.setText("" + vm.getPokemon());
         puntuacion.setText("" + vm.getPunto());
