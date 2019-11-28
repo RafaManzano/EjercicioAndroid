@@ -1,6 +1,5 @@
 package es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,24 +7,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Pokemones;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.R;
-import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.ViewModel;
+import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.ViewModelPokemon;
 
 public class PokemonFragment extends Fragment implements  View.OnClickListener {
     private EditText et;
     private Button b;
     private ImageView iv;
-    private ViewModel vm = new ViewModel();
+    private ViewModelPokemon vm;
     private Pokemones[] pokemones = Pokemones.listadoPokemones();
     private Pokemones p;
     private int numero;
@@ -56,7 +56,23 @@ public class PokemonFragment extends Fragment implements  View.OnClickListener {
         iv = v.findViewById(R.id.imagen);
         iv.setImageResource(p.getImagen());
         b.setOnClickListener(this);
+        vm = new ViewModelPokemon();
+        vm = ViewModelProviders.of(this).get(ViewModelPokemon.class);
+
+        //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
+
+        vm.getDatosAcambiar().observe(this, new Observer<ArrayList<Integer>>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(ArrayList<Integer> numeros) {
+               vm.setDescubierto("POKEMON ENCONTRADOS: " + numeros.get(0));
+               vm.setPuntuacion("PUNTUACION: " + numeros.get(1));
+            }
+        });
+
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -67,11 +83,12 @@ public class PokemonFragment extends Fragment implements  View.OnClickListener {
 
         vm.setPokemon(vm.getPokemon() - 1);
 
+        vm.modificarNumeros();
         //Quitar de aqui, excede de sus competencias
         //De momento se queda aqui hasta acabar el programa
         getFragmentManager().beginTransaction().remove(this).commit();
 
-        //Puede ser tambien el cambio por el ViewModel
+        //Puede ser tambien el cambio por el ViewModelPokemon
         //Podemos usar con MutableLiveData y observar el dato en caso de cambio
 
     }

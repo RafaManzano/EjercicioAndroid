@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.*;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.*;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button b1;
     private Button b2;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button b7;
     private TextView pokemons;
     private TextView puntuacion;
-    private ViewModel vm;
+    private ViewModelPokemon vm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +47,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b6.setOnClickListener(this);
         b7.setOnClickListener(this);
 
+        pokemons.setText(vm.getDescubierto());
+        puntuacion.setText(vm.getPuntuacion());
         //viewModel
+        /*
+        vm = new ViewModelPokemon();
+        vm = ViewModelProviders.of(this).get(ViewModelPokemon.class);
 
-        pokemons.setText(pokemons.getText() + " " + vm.getPokemon());
-        puntuacion.setText(puntuacion.getText() + " " + vm.getPunto());
+
         //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
+
+        vm.getDatosAcambiar().observe(this, new Observer<ArrayList<Integer>>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(ArrayList<Integer> numeros) {
+
+                pokemons.setText(pokemons.getText() + " " + numeros.get(0));
+                puntuacion.setText(puntuacion.getText() + " " + numeros.get(1));
+            }
+        });
+        */
+
+
     }
 
     public void ayuda(View view) {
@@ -62,9 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         PokemonFragment pok = new PokemonFragment();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
         view.setClickable(false);
-        pokemons.setText("" + vm.getPokemon());
-        puntuacion.setText("" + vm.getPunto());
+        vm.modificarNumeros();
+        //pokemons.setText("" + vm.getPokemon());
+        //puntuacion.setText("" + vm.getPunto());
     }
 }
