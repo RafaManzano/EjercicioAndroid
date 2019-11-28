@@ -62,8 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Pokemon pok = new Pokemon();
+        PokemonFragment pok = new PokemonFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
         view.setClickable(false);
+        pokemons.setText("" + vm.getPokemon());
+        puntuacion.setText("" + vm.getPunto());
     }
 }

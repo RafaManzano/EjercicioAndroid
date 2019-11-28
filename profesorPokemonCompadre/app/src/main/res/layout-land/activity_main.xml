@@ -18,6 +18,7 @@
         android:textSize="25dp"
         android:textStyle="bold"
         android:background="#4DFFFFFF"/>
+
     <FrameLayout
         android:id="@+id/framel"
         android:layout_width="350dp"
@@ -28,56 +29,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <Button
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        android:layout_marginLeft="108dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#fff"
-        android:id="@+id/boton1"/>
-
-    <Button
-        android:id="@+id/boton2"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        android:layout_marginLeft="560dp"
-        android:layout_marginTop="160dp"
-        android:background="#fff"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/boton3"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        android:layout_marginLeft="256dp"
-        android:layout_marginTop="296dp"
-        android:background="#fff"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/boton5"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        android:layout_marginLeft="656dp"
-        android:layout_marginTop="280dp"
-        android:background="#fff"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/boton6"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="200dp"
-        android:background="#fff"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/boton7"
@@ -86,7 +37,6 @@
         android:layout_marginTop="112dp"
         android:background="#fff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,10 +44,62 @@
         android:id="@+id/boton4"
         android:layout_width="25dp"
         android:layout_height="26dp"
-        android:layout_marginLeft="480dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginBottom="120dp"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/boton1"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="96dp"
         android:background="#fff"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/boton2"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="148dp"
+        android:background="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/boton3"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="248dp"
+        android:layout_marginTop="264dp"
+        android:background="#fff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/boton5"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="288dp"
+        android:layout_marginEnd="52dp"
+        android:background="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/boton6"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="272dp"
+        android:background="#fff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

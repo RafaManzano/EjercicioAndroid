@@ -21,7 +21,7 @@ import es.iesnervion.rmanzano.profesorpokemoncompadre.Pokemones;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.R;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.ViewModel;
 
-public class Pokemon extends Fragment implements  View.OnClickListener {
+public class PokemonFragment extends Fragment implements  View.OnClickListener {
     private EditText et;
     private Button b;
     private ImageView iv;
@@ -30,7 +30,7 @@ public class Pokemon extends Fragment implements  View.OnClickListener {
     private Pokemones p;
     private int numero;
 
-    public Pokemon() {
+    public PokemonFragment() {
 
     }
 
