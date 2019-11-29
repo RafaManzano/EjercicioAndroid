@@ -1,5 +1,6 @@
 package es.iesnervion.rmanzano.profesorpokemoncompadre;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Fragments.*;
 import es.iesnervion.rmanzano.profesorpokemoncompadre.ViewModel.*;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView pokemons;
     private TextView puntuacion;
     private ViewModelPokemon vm;
+    private PokemonFragment pok;
+    private Intent intentDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,27 +51,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b5.setOnClickListener(this);
         b6.setOnClickListener(this);
         b7.setOnClickListener(this);
-
-        pokemons.setText(vm.getDescubierto());
-        puntuacion.setText(vm.getPuntuacion());
+        pok = new PokemonFragment();
+        intentDatos = new Intent(this, FinalPantalla.class);
+        //pokemons.setText(vm.getDescubierto());
+        //puntuacion.setText(vm.getPuntuacion());
         //viewModel
-        /*
+
         vm = new ViewModelPokemon();
         vm = ViewModelProviders.of(this).get(ViewModelPokemon.class);
 
-
-        //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
-
-        vm.getDatosAcambiar().observe(this, new Observer<ArrayList<Integer>>() {
+        vm.getCerrarFragment().observe(this, new Observer<Boolean>() {
             @Override
             //Si entra en este metodo quiere decir que hay un cambio para notificar
-            public void onChanged(ArrayList<Integer> numeros) {
-
-                pokemons.setText(pokemons.getText() + " " + numeros.get(0));
-                puntuacion.setText(puntuacion.getText() + " " + numeros.get(1));
+            public void onChanged(Boolean cerrar) {
+                if(cerrar) {
+                    getSupportFragmentManager().beginTransaction().remove(pok).commit();
+                }
             }
         });
-        */
+
+        vm.getDescubierto().observe(this, new Observer<Integer>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(Integer n) {
+
+                pokemons.setText("POKEMON ENCONTRADOS : " + n);
+                if(n == 0) {
+                    intentDatos.putExtra("puntos", vm.getPunto());
+                    startActivity(intentDatos);
+                }
+            }
+        });
+
+        vm.getPuntuacion().observe(this, new Observer<Integer>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(Integer n) {
+
+                puntuacion.setText("PUNTUACION : " + n);
+            }
+        });
+
 
 
     }
@@ -79,10 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        PokemonFragment pok = new PokemonFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.framel, pok).commit();
         view.setClickable(false);
-        vm.modificarNumeros();
+        //vm.modificarNumeros();
         //pokemons.setText("" + vm.getPokemon());
         //puntuacion.setText("" + vm.getPunto());
     }

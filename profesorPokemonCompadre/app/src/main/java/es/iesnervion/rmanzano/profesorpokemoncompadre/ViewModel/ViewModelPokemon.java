@@ -8,16 +8,19 @@ import java.util.ArrayList;
 public class ViewModelPokemon extends ViewModel {
     private int punto;
     private int pokemon;
-    MutableLiveData<ArrayList<Integer>> datosAcambiar;
-    String puntuacion;
-    String descubierto;
+    private boolean botonPulsado;
+
+    private MutableLiveData<Integer> puntuacion;
+    private MutableLiveData<Integer> descubierto;
+    private MutableLiveData<Boolean> cerrarFragment;
 
     public ViewModelPokemon() {
         punto = 0;
         pokemon = 7;
-        datosAcambiar = new MutableLiveData<>();
-        descubierto = "POKEMON ENCONTRADOS: 7";
-        puntuacion = "PUNTUACION: 0" ;
+        botonPulsado = false;
+        puntuacion = new MutableLiveData<>();
+        descubierto = new MutableLiveData<>();
+        cerrarFragment = new MutableLiveData<>();
     }
 
     public ViewModelPokemon(int punto, int pokemon) {
@@ -31,6 +34,8 @@ public class ViewModelPokemon extends ViewModel {
 
     public void setPunto(int punto) {
         this.punto = punto;
+        cambioPuntuacion(punto);
+
     }
 
     public int getPokemon() {
@@ -39,34 +44,54 @@ public class ViewModelPokemon extends ViewModel {
 
     public void setPokemon(int pokemon) {
         this.pokemon = pokemon;
+        cambioPokemonEncontrado(pokemon);
     }
 
-    public MutableLiveData<ArrayList<Integer>> getDatosAcambiar() {
-        return datosAcambiar;
+    public boolean isBotonPulsado() {
+        return botonPulsado;
     }
 
-    public void modificarNumeros() {
-        ArrayList<Integer> numeros = new ArrayList<>();
-        numeros.add(getPokemon());
-        numeros.add(getPunto());
-        datosAcambiar.setValue(numeros);
-        descubierto = ("POKEMON ENCONTRADOS: " + numeros.get(0));
-        puntuacion = ("PUNTUACION: " + numeros.get(1));
+    public void setBotonPulsado(boolean botonPulsado) {
+        this.botonPulsado = botonPulsado;
+        cambioCerrarFragment(botonPulsado);
     }
 
-    public String getPuntuacion() {
+    public MutableLiveData<Integer> getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(String puntuacion) {
+    public void setPuntuacion(MutableLiveData<Integer> puntuacion) {
         this.puntuacion = puntuacion;
     }
 
-    public String getDescubierto() {
+    public MutableLiveData<Integer> getDescubierto() {
         return descubierto;
     }
 
-    public void setDescubierto(String descubierto) {
+    public void setDescubierto(MutableLiveData<Integer> descubierto) {
         this.descubierto = descubierto;
+    }
+
+    public MutableLiveData<Boolean> getCerrarFragment() {
+        return cerrarFragment;
+    }
+
+    public void setCerrarFragment(MutableLiveData<Boolean> cerrarFragment) {
+        this.cerrarFragment = cerrarFragment;
+    }
+
+    /*
+    Metodos para realizar los MutableLiveData
+     */
+
+    public void cambioPokemonEncontrado(int n) {
+        descubierto.setValue(n);
+    }
+    public void cambioPuntuacion(int n) {
+        puntuacion.setValue(n);
+    }
+
+    public void cambioCerrarFragment(boolean c) {
+        cerrarFragment.setValue(c);
     }
 }

@@ -11,7 +11,7 @@
         android:id="@+id/descubiertos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="POKEMON ENCONTRADOS :"
+        android:text="POKEMON ENCONTRADOS : 7"
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -114,7 +114,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PUNTUACION :"
+        android:text="PUNTUACION : 0"
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

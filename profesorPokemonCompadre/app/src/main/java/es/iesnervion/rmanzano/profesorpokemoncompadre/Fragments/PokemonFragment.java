@@ -11,10 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 import es.iesnervion.rmanzano.profesorpokemoncompadre.Pokemones;
@@ -56,19 +53,7 @@ public class PokemonFragment extends Fragment implements  View.OnClickListener {
         iv = v.findViewById(R.id.imagen);
         iv.setImageResource(p.getImagen());
         b.setOnClickListener(this);
-        vm = new ViewModelPokemon();
-        vm = ViewModelProviders.of(this).get(ViewModelPokemon.class);
-
-        //TODO realizar los MutableLiveData para que cuando se elija un pokemon se baje o aumente los numeros
-
-        vm.getDatosAcambiar().observe(this, new Observer<ArrayList<Integer>>() {
-            @Override
-            //Si entra en este metodo quiere decir que hay un cambio para notificar
-            public void onChanged(ArrayList<Integer> numeros) {
-               vm.setDescubierto("POKEMON ENCONTRADOS: " + numeros.get(0));
-               vm.setPuntuacion("PUNTUACION: " + numeros.get(1));
-            }
-        });
+        vm = ViewModelProviders.of(getActivity()).get(ViewModelPokemon.class);
 
     }
 
@@ -78,18 +63,18 @@ public class PokemonFragment extends Fragment implements  View.OnClickListener {
     public void onClick(View v) {
         String respuesta = et.getText().toString();
         if(respuesta.equalsIgnoreCase(p.getNombre())) {
-            vm.setPunto(vm.getPunto()+1);
+            vm.setPunto(vm.getPunto() + 1);
         }
 
         vm.setPokemon(vm.getPokemon() - 1);
 
-        vm.modificarNumeros();
         //Quitar de aqui, excede de sus competencias
         //De momento se queda aqui hasta acabar el programa
-        getFragmentManager().beginTransaction().remove(this).commit();
+        //getFragmentManager().beginTransaction().remove(this).commit();
 
         //Puede ser tambien el cambio por el ViewModelPokemon
         //Podemos usar con MutableLiveData y observar el dato en caso de cambio
+        vm.setBotonPulsado(true);
 
     }
 
