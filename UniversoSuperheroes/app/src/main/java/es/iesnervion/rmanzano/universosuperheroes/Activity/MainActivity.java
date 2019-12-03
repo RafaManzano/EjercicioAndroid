@@ -46,6 +46,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         startActivity(intent);
     }
 
+    public void botonMas(View view) {
+        Intent intent = new Intent(getApplicationContext(), FormCompanhia.class);
+        startActivity(intent);
+    }
+
     private class Adaptador extends BaseAdapter {
         private ArrayList<Companhia> companhias;
         private Companhia companhia;
