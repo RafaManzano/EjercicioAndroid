@@ -6,16 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class EstadisticasActivity extends ListActivity {
+public class EstadisticasActivity extends AppCompatActivity {
+    private ArrayList<Estadistica> estadisticas;
+    private ListView listEstadisitica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
+        estadisticas = new ArrayList<Estadistica>(UsarDatabase.getDatabase(this).dao().recogerEstadisticas());
+        listEstadisitica = findViewById(R.id.lista);
+        Adaptador adapter = new Adaptador(estadisticas);
+        listEstadisitica.setAdapter(adapter);
     }
 
     /*

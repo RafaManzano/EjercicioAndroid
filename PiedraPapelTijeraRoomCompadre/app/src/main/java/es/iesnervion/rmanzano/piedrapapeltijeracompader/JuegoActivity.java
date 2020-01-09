@@ -19,11 +19,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     private Button tijera;
     private ImageView imagenJug;
     private ImageView imagenMaq;
-
-    SharedPreferences shared = this.getSharedPreferences("shared", Context.MODE_PRIVATE);
-    SharedPreferences.Editor edit = shared.edit();
-
-
+    private Estadistica estadistica;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +31,21 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         tijera = findViewById(R.id.tijera);
         imagenJug = findViewById(R.id.eJugador);
         imagenMaq = findViewById(R.id.eMaquina);
+        estadistica = new Estadistica();
+        context = this.getApplicationContext();
 
 
         piedra.setOnClickListener(this);
         papel.setOnClickListener(this);
         tijera.setOnClickListener(this);
+
+
+
+        /*
+        IMPORTANTE, DE MOMENTO SE QUEDA EN EL HILO PRINCIPAL PERO DEBERIA ESTAR EN SEGUNDO PLANO
+        EL ACCESO A LA BBDD
+         */
+
     }
 
     @Override
@@ -77,13 +84,25 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         tijera.setClickable(false);
     }
 
+    /*
+    Se usa cuando se pulsa el boton de volver a jugar para que se puedan pulsar los botones de nuevo
+     */
+    public void desbloquearBotones() {
+        piedra.setClickable(true);
+        papel.setClickable(true);
+        tijera.setClickable(true);
+    }
+
     public void terminarPartida(View view) {
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void resetearPartida(View view) {
-        Intent intent = new Intent(this, JuegoActivity.class);
-        startActivity(intent);
+        imagenJug.setImageResource(0);
+        imagenMaq.setImageResource(0);
+        desbloquearBotones();
+        //howGanador.setText("");
     }
 
     public int[] eleccionMaquina() {
@@ -99,60 +118,72 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
 
        switch (jugador) {
            case 0:
-               edit.putString("Jugador", "Piedra");
+               //edit.putString("Jugador", "Piedra");
+               estadistica.setJugador("Piedra");
                switch (maquina) {
                    case 0:
-                       edit.putString("Maquina", "Piedra");
+                       //edit.putString("Maquina", "Piedra");
+                       estadistica.setMaquina("Piedra");
                        ganador = 0;
                        break;
 
                    case 1:
-                       edit.putString("Maquina", "Papel");
+                       //edit.putString("Maquina", "Papel");
+                       estadistica.setMaquina("Papel");
                        ganador = -1;
                        break;
 
                    case 2:
-                       edit.putString("Maquina", "Tijera");
+                       //edit.putString("Maquina", "Tijera");
+                       estadistica.setMaquina("Tijera");
                        ganador = 1;
                        break;
                }
                break;
 
            case 1:
-               edit.putString("Jugador", "Papel");
+               //edit.putString("Jugador", "Papel");
+               estadistica.setJugador("Papel");
                switch (maquina) {
                    case 0:
-                       edit.putString("Maquina", "Piedra");
+                       //edit.putString("Maquina", "Piedra");
+                       estadistica.setMaquina("Piedra");
                        ganador = 1;
                        break;
 
                    case 1:
-                       edit.putString("Maquina", "Papel");
+                       //edit.putString("Maquina", "Papel");
+                       estadistica.setMaquina("Papel");
                        ganador = 0;
                        break;
 
                    case 2:
-                       edit.putString("Maquina", "Tijera");
+                       //edit.putString("Maquina", "Tijera");
+                       estadistica.setMaquina("Tijera");
                        ganador = -1;
                        break;
                }
                break;
 
            case 2:
-               edit.putString("Jugador", "Tijera");
+               //edit.putString("Jugador", "Tijera");
+               estadistica.setJugador("Tijera");
                switch (maquina) {
                    case 0:
-                       edit.putString("Maquina", "Piedra");
+                       //edit.putString("Maquina", "Piedra");
+                       estadistica.setMaquina("Piedra");
                        ganador = -1;
                        break;
 
                    case 1:
-                       edit.putString("Maquina", "Papel");
+                       //edit.putString("Maquina", "Papel");
+                       estadistica.setMaquina("Papel");
                        ganador = 1;
                        break;
 
                    case 2:
-                       edit.putString("Maquina", "Tijera");
+                       //edit.putString("Maquina", "Tijera");
+                       estadistica.setMaquina("Tijera");
                        ganador = 0;
                        break;
                }
@@ -165,16 +196,21 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     public void guardarEstadisticas(int ganador) {
         switch (ganador) {
             case 0:
-                edit.putString("Ganador", "Empate");
+                //edit.putString("Ganador", "Empate");
+                estadistica.setGanador("Empate");
                 break;
 
             case 1:
-                edit.putString("Ganador", "Jugador");
+                //edit.putString("Ganador", "Jugador");
+                estadistica.setGanador("Jugador");
                 break;
 
             case -1:
-                edit.putString("Ganador", "Maquina");
+                //edit.putString("Ganador", "Maquina");
+                estadistica.setGanador("Maquina");
                 break;
         }
+
+        UsarDatabase.getDatabase(context).dao().insertarEstadistica(estadistica);
     }
 }

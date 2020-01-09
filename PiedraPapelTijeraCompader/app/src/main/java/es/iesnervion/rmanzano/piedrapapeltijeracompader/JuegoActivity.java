@@ -27,12 +27,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences.Editor edit;
     ViewModel vm;
 
-    //TODO ME FALTA QUE SE MUESTRE EL GANADOR
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +50,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imagenJug = findViewById(R.id.eJugador);
         imagenMaq = findViewById(R.id.eMaquina);
         howGanador = findViewById(R.id.howganador);
-
 
         piedra.setOnClickListener(this);
         papel.setOnClickListener(this);
