@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -21,6 +23,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imagenMaq;
     private Estadistica estadistica;
     private Context context;
+    private TextView howGanador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imagenMaq = findViewById(R.id.eMaquina);
         estadistica = new Estadistica();
         context = this.getApplicationContext();
+        howGanador = findViewById(R.id.howganador);
 
 
         piedra.setOnClickListener(this);
@@ -102,7 +106,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imagenJug.setImageResource(0);
         imagenMaq.setImageResource(0);
         desbloquearBotones();
-        //howGanador.setText("");
+        howGanador.setText("");
     }
 
     public int[] eleccionMaquina() {
@@ -198,16 +202,22 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
             case 0:
                 //edit.putString("Ganador", "Empate");
                 estadistica.setGanador("Empate");
+                howGanador.setText("EMPATE");
+                howGanador.setTextColor(Color.BLUE);
                 break;
 
             case 1:
                 //edit.putString("Ganador", "Jugador");
                 estadistica.setGanador("Jugador");
+                howGanador.setText("VICTORIA");
+                howGanador.setTextColor(Color.GREEN);
                 break;
 
             case -1:
                 //edit.putString("Ganador", "Maquina");
                 estadistica.setGanador("Maquina");
+                howGanador.setText("DERROTA");
+                howGanador.setTextColor(Color.RED);
                 break;
         }
 

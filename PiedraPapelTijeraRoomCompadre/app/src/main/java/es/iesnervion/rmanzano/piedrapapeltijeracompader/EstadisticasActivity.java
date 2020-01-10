@@ -27,6 +27,11 @@ public class EstadisticasActivity extends AppCompatActivity {
         listEstadisitica.setAdapter(adapter);
     }
 
+    public void reset(View view) {
+        UsarDatabase.getDatabase(this).dao().borrarEstadisticas(estadisticas);
+        recreate();
+    }
+
     /*
         Es la clase Adaptador para las listas
      */
