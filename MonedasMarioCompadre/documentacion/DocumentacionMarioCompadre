@@ -1,0 +1,4 @@
+Main Activity= Pantalla principal con jugar y estadisticas (Musica sera automatica de Mario)
+Elegir Nombre= Sera un fragment
+Juego Principal= Consistira en coger todas las monedas hay varias formas de acabar (Levantar un bowser o coger todas las monedas o plantarse)
+Estadisticas= Se guardara el nombre del jugador y la puntuacion, la lista se intentara poner de mayor a menor
