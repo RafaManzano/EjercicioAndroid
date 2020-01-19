@@ -2,4 +2,7 @@
     <string name="app_name">Coin Catch</string>
     <string name="botonplay">PLAY</string>
     <string name="botonsta">STATISTICS</string>
+    <string name="monedas">Captured Coins:</string>
+    <string name="terminar">Finish</string>
+    <string name="repetir">Repeat</string>
 </resources>

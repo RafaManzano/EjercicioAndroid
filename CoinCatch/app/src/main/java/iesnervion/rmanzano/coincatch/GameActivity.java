@@ -1,16 +1,20 @@
 package iesnervion.rmanzano.coincatch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import iesnervion.rmanzano.coincatch.classes.Item;
+import iesnervion.rmanzano.coincatch.fragments.FragmentFinalizar;
 import iesnervion.rmanzano.coincatch.helps.Methods;
+import iesnervion.rmanzano.coincatch.viewModel.ViewModel;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton uno;
@@ -32,7 +36,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton diecisiete;
     private ImageButton dieciocho;
     private Methods methods = new Methods();
-    ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
+    private ViewModel viewModel;
+    private FragmentFinalizar finalizar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +86,46 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         diecisiete.setOnClickListener(this);
         dieciocho.setOnClickListener(this);
 
+        //ViewModel
+        viewModel = new ViewModel();
+        //viewModel = ViewModelProviders.of(this).get(ViewModel.class);
+
+        //Fragment
+        finalizar = new FragmentFinalizar();
+
     }
 
     @Override
     public void onClick(View v) {
+        ImageView view = (ImageView) v;
+        view.setImageResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
+        switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) {
+            case R.drawable.moneda:
+                viewModel.setMonedas(viewModel.getMonedas() + 5);
+                break;
 
+            case R.drawable.agujeronegro:
+                //Fragment de finalizar
+
+                break;
+
+            case R.drawable.luna:
+
+                break;
+
+            case R.drawable.meteorito:
+                viewModel.setMonedas(viewModel.getMonedas() - 3);
+                break;
+
+            case R.drawable.nave:
+                viewModel.setMonedas(viewModel.getMonedas() * 2);
+                break;
+        }
+    }
+
+
+    public void plantarse(View view) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
+        view.setClickable(false);
     }
 }
