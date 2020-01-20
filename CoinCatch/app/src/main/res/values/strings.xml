@@ -5,4 +5,6 @@
     <string name="monedas">Captured Coins:</string>
     <string name="terminar">Finish</string>
     <string name="repetir">Repeat</string>
+    <string name="plantarse">STOP</string>
+    <string name="puntuacion">SCORE</string>
 </resources>

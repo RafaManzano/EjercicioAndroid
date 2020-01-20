@@ -5,4 +5,6 @@
     <string name="monedas">Monedas Capturadas:</string>
     <string name="terminar">Terminar Juego</string>
     <string name="repetir">Volver a Jugar</string>
+    <string name="plantarse">PLANTARSE</string>
+    <string name="puntuacion">PUNTUACION</string>
 </resources>

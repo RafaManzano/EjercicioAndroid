@@ -1,20 +1,24 @@
 package iesnervion.rmanzano.coincatch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import iesnervion.rmanzano.coincatch.classes.Item;
 import iesnervion.rmanzano.coincatch.fragments.FragmentFinalizar;
 import iesnervion.rmanzano.coincatch.helps.Methods;
-import iesnervion.rmanzano.coincatch.viewModel.ViewModel;
+import iesnervion.rmanzano.coincatch.viewModel.CoinViewModel;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton uno;
@@ -37,8 +41,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton dieciocho;
     private Methods methods = new Methods();
     private ArrayList<Item> items = new ArrayList<>();
-    private ViewModel viewModel;
+    private CoinViewModel coinViewModel;
     private FragmentFinalizar finalizar;
+    private TextView monedasMostrar;
+    private Activity miactividad;
 
 
 
@@ -47,7 +53,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //Para crear las imagenes y la logica del juego
         items = methods.randomizarLista(methods.listadeItems());
+
+        //Los finds de los botones (18)
         uno = findViewById(R.id.uno);
         dos = findViewById(R.id.dos);
         tres = findViewById(R.id.tres);
@@ -67,6 +77,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         diecisiete = findViewById(R.id.diecisiete);
         dieciocho = findViewById(R.id.dieciocho);
 
+        //Para mostrar las monedas que estan capturadas
+        monedasMostrar = findViewById(R.id.monedasgame);
+
+        //Cogemos la actividad para hacer un reload
+        miactividad = this;
+
+        //El onclickListener de cada boton (18)
         uno.setOnClickListener(this);
         dos.setOnClickListener(this);
         tres.setOnClickListener(this);
@@ -86,46 +103,76 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         diecisiete.setOnClickListener(this);
         dieciocho.setOnClickListener(this);
 
-        //ViewModel
-        viewModel = new ViewModel();
-        //viewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        //CoinViewModel
+        coinViewModel = ViewModelProviders.of(this).get(CoinViewModel.class);
 
         //Fragment
         finalizar = new FragmentFinalizar();
+
+        //Aqui decide que hace cada boton del fragmento (1 Repetir Juego, 2 Terminar Juego)
+        coinViewModel.getSaberBotonPulsado().observe(this, new Observer<Integer>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(Integer pulsacion) {
+                if(pulsacion == 1) {
+                    getSupportFragmentManager().beginTransaction().remove(finalizar).commit();
+                    finish();
+                    Intent intent = new Intent(miactividad, GameActivity.class);
+                    startActivity(intent);
+                    //miactividad.recreate();
+                }
+                else {
+                    getSupportFragmentManager().beginTransaction().remove(finalizar).commit();
+                    finish();
+                }
+            }
+        });
 
     }
 
     @Override
     public void onClick(View v) {
         ImageView view = (ImageView) v;
-        view.setImageResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
+        //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
+        view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
         switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) {
+
             case R.drawable.moneda:
-                viewModel.setMonedas(viewModel.getMonedas() + 5);
+                coinViewModel.setMonedas(coinViewModel.getMonedas() + 5);
                 break;
 
             case R.drawable.agujeronegro:
-                //Fragment de finalizar
-
+                coinViewModel.setMonedas(0);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
                 break;
 
             case R.drawable.luna:
-
+                //La luna no hace nada
                 break;
 
             case R.drawable.meteorito:
-                viewModel.setMonedas(viewModel.getMonedas() - 3);
+                coinViewModel.setMonedas(coinViewModel.getMonedas() - 3);
                 break;
 
             case R.drawable.nave:
-                viewModel.setMonedas(viewModel.getMonedas() * 2);
+                coinViewModel.setMonedas(coinViewModel.getMonedas() * 2);
                 break;
         }
+
+        if(coinViewModel.getMonedas() < 0) {
+            coinViewModel.setMonedas(0);
+            monedasMostrar.setText( "" + coinViewModel.getMonedas());
+        }
+        else {
+            monedasMostrar.setText("" + coinViewModel.getMonedas());
+        }
+
     }
 
 
     public void plantarse(View view) {
+        //Iniciar el fragmento porque el usuario se ha plantado
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
-        view.setClickable(false);
     }
+
 }
