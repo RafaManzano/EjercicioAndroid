@@ -1,10 +1,13 @@
 package iesnervion.rmanzano.coincatch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import iesnervion.rmanzano.coincatch.fragments.InfoDialogFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,5 +25,11 @@ public class MainActivity extends AppCompatActivity {
     public void statistics(View view) {
         Intent intent = new Intent(this, StatisticsActivity.class);
         startActivity(intent);
+    }
+
+    public void info(View view) {
+        InfoDialogFragment ay = new InfoDialogFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        ay.show(fm, "fragment_alert");
     }
 }

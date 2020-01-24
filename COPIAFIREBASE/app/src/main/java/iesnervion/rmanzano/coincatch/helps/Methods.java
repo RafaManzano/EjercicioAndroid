@@ -53,7 +53,6 @@ public class Methods {
 
 
         }
-        //Revisar, tengo que hacer introducir los datos de una lista a otra aleatoriamente y sin repetidos
 
         return lista;
     }

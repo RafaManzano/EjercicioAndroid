@@ -7,4 +7,6 @@
     <string name="repetir">Repeat</string>
     <string name="plantarse">STOP</string>
     <string name="puntuacion">SCORE</string>
+    <string name="anonimo">Anonimous</string>
+    <string name="info">HOW PLAY?</string>
 </resources>

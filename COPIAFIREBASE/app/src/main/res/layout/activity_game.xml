@@ -256,7 +256,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="#F44611"
         android:text="@string/plantarse"
-        android:onClick="plantarse"/>
+        android:onClick="plantarse"
+        android:translationZ="0dp"/>
 
     <FrameLayout
         android:id="@+id/frame"

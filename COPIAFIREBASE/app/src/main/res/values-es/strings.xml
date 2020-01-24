@@ -7,4 +7,6 @@
     <string name="repetir">Volver a Jugar</string>
     <string name="plantarse">PLANTARSE</string>
     <string name="puntuacion">PUNTUACION</string>
+    <string name="anonimo">Anonimo</string>
+    <string name="info">COMO JUGAR?</string>
 </resources>

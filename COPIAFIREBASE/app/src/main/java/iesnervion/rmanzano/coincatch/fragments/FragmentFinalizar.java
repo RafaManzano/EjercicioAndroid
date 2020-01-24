@@ -96,8 +96,8 @@ public class FragmentFinalizar extends Fragment implements View.OnClickListener 
     }
 
     public void recogerNick() {
-        if(nickname.getText().toString() == "") {
-            nickname.setText("Anonimo");
+        if(nickname.getText().toString().equals("")) {
+            nickname.setText(R.string.anonimo);
         }
         else {
             nickname.getText().toString();
@@ -106,23 +106,28 @@ public class FragmentFinalizar extends Fragment implements View.OnClickListener 
 
     public void insertarPuntuacion() {
         Map<String, Object> data = new HashMap<>();
+        recogerNick();
         data.put("Nickname", nickname.getText().toString());
         data.put("Score", coinViewModel.getMonedas());
 
-        db.collection("Stats")
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("CORRECTO", "DocumentSnapshot written with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("INCORRECTO", "Error adding document", e);
-                    }
-                });
+        if(coinViewModel.getMonedas() > 0) {
+            db.collection("Stats")
+                    .add(data)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("CORRECTO", "DocumentSnapshot written with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("INCORRECTO", "Error adding document", e);
+                        }
+                    });
+        }
+
+
 
 
     }
