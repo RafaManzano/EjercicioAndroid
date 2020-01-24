@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "265277756833",
+    "firebase_url": "https://coincatch-742ac.firebaseio.com",
+    "project_id": "coincatch-742ac",
+    "storage_bucket": "coincatch-742ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265277756833:android:1856fd03fa9dacda1767e0",
+        "android_client_info": {
+          "package_name": "iesnervion.rmanzano.coincatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265277756833-a9q2n8g94ukkucvtovp4s3j70ims4vff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iesnervion.rmanzano.coincatch",
+            "certificate_hash": "0c5406a441e9d4a0336357cd7c07015fde376541"
+          }
+        },
+        {
+          "client_id": "265277756833-55p1l7gk6ij9ls6hma6d8bqt7pmbf52t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwgWy5YyF-eGfbyMD-N2zWsyoozAqy5E8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265277756833-55p1l7gk6ij9ls6hma6d8bqt7pmbf52t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
