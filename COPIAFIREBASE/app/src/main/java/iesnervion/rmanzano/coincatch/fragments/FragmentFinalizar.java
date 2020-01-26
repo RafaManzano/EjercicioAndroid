@@ -24,13 +24,15 @@ import java.util.Map;
 
 import iesnervion.rmanzano.coincatch.R;
 import iesnervion.rmanzano.coincatch.viewModel.CoinViewModel;
+import iesnervion.rmanzano.coincatch.viewModel.MainViewModel;
 
 public class FragmentFinalizar extends Fragment implements View.OnClickListener {
     private TextView monedasCapturadas;
     private CoinViewModel coinViewModel;
     private Button repetir;
     private Button terminar;
-    private EditText nickname;
+    private TextView nickname;
+    private MainViewModel mainViewModel;
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -54,10 +56,12 @@ public class FragmentFinalizar extends Fragment implements View.OnClickListener 
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         terminar = v.findViewById(R.id.terminar);
         repetir = v.findViewById(R.id.repetir);
         monedasCapturadas = v.findViewById(R.id.mostrarMonedas);
-        nickname = v.findViewById(R.id.etNombre);
+        nickname = v.findViewById(R.id.nickname);
+        nickname.setText(mainViewModel.getNickname());
         //coinViewModel = new CoinViewModel(); Esto no puede ser porque sino habria dos instancias
         //ViewModel
         coinViewModel = ViewModelProviders.of(getActivity()).get(CoinViewModel.class);
