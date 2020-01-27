@@ -17,14 +17,16 @@ import iesnervion.rmanzano.coincatch.viewModel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel mainViewModel;
-    private NicknameFragment nicknameFragment;
+    //private MainViewModel mainViewModel;
+    //private NicknameFragment nicknameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
+        /*
         //CoinViewModel
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -61,4 +63,6 @@ public class MainActivity extends AppCompatActivity {
     public void cambiarNombre(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.framel, nicknameFragment).commit();
     }
+    */
+
 }
