@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">CoinCatchDef</string>
+    <string name="app_name">Coin Catch</string>
+    <string name="botonplay">PLAY</string>
+    <string name="botonsta">STATISTICS</string>
+    <string name="monedas">Captured Coins:</string>
+    <string name="terminar">Finish</string>
+    <string name="repetir">Repeat</string>
+    <string name="plantarse">STOP</string>
+    <string name="puntuacion">SCORE</string>
+    <string name="anonimo">Anonimous</string>
+    <string name="info">HOW TO PLAY?</string>
+    <string name="change">CHOOSE/CHANGE NICKNAME</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
 </resources>
