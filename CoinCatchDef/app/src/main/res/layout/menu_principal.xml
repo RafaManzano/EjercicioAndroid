@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/cielo">
 
     <TextView
         android:id="@+id/titulo"
@@ -12,10 +13,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="80dp"
-        android:textColor="#000"
+        android:layout_marginTop="15dp"
+        android:textColor="#fff"
         android:textSize="30sp"
         android:textStyle="bold"/>
+
+
 
     <Button
         android:id="@+id/jugar"
@@ -23,24 +26,26 @@
         android:layout_height="wrap_content"
         android:text="@string/botonplay"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/estadisticas"
         android:textColor="#000"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/titulo"
+        app:layout_constraintHorizontal_chainStyle="spread"
         />
+
 
     <Button
         android:id="@+id/estadisticas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/botonsta"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/jugar"
         app:layout_constraintRight_toRightOf="parent"
         android:textColor="#000"
         android:layout_marginTop="30dp"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/jugar"
+        app:layout_constraintTop_toBottomOf="@id/titulo"
         />
 
     <Button
@@ -49,11 +54,12 @@
         android:layout_height="wrap_content"
         android:text="@string/info"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/chNickname"
+        app:layout_constraintHorizontal_chainStyle="spread"
         android:textColor="#000"
         android:layout_marginTop="30dp"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/estadisticas"
+        app:layout_constraintTop_toBottomOf="@id/jugar"
         />
 
     <Button
@@ -61,12 +67,12 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="@string/change"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/info"
         app:layout_constraintRight_toRightOf="parent"
         android:textColor="#000"
         android:layout_marginTop="30dp"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/info"
+        app:layout_constraintTop_toBottomOf="@id/estadisticas"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,14 +15,13 @@ import androidx.lifecycle.ViewModelProviders;
 import iesnervion.rmanzano.coincatchdef.R;
 import iesnervion.rmanzano.coincatchdef.viewModel.MainViewModel;
 
-public class MenuPrincipalFragment extends Fragment implements View.OnClickListener {
-    private Button play;
-    private Button stats;
-    private Button change;
-    private Button info;
+public class NicknameFragment extends Fragment implements View.OnClickListener{
+    private EditText et;
+    private Button aceptar;
+    private Button cancelar;
     private MainViewModel mainViewModel;
 
-    public MenuPrincipalFragment() {
+    public NicknameFragment() {
 
     }
 
@@ -34,44 +34,33 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.menu_principal, container, false);
+        View v = inflater.inflate(R.layout.fragment_nickname, container, false);
         return v;
     }
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
-        play = v.findViewById(R.id.jugar);
-        info = v.findViewById(R.id.info);
-        stats = v.findViewById(R.id.estadisticas);
-        change = v.findViewById(R.id.chNickname);
-        //CoinViewModel
-        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        et = v.findViewById(R.id.editNick);
+        aceptar = v.findViewById(R.id.aceptar);
+        cancelar = v.findViewById(R.id.cancelar);
+        aceptar.setOnClickListener(this);
+        cancelar.setOnClickListener(this);
 
-        play.setOnClickListener(this);
-        info.setOnClickListener(this);
-        stats.setOnClickListener(this);
-        change.setOnClickListener(this);
+        //mainViewModel
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.jugar:
-                //mainViewModel.setNickname(et.getText().toString());
-                mainViewModel.setBotonPulsado(1);
+            case R.id.aceptar:
+                mainViewModel.setNickname(et.getText().toString());
+                mainViewModel.botonElegido(5);
                 break;
 
-            case R.id.info:
-                mainViewModel.setBotonPulsado(2);
-                //mainViewModel.botonElegido(1);
-                break;
-
-            case R.id.estadisticas:
-                mainViewModel.setBotonPulsado(3);
-                break;
-
-            case R.id.chNickname:
-                mainViewModel.setBotonPulsado(4);
+            case R.id.cancelar:
+                et.setText(mainViewModel.getNickname());
+                mainViewModel.botonElegido(5);
                 break;
         }
     }
