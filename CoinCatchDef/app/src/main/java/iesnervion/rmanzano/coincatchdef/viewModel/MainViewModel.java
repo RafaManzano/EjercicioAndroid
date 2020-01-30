@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 public class MainViewModel extends ViewModel {
     private int monedas;
     private int botonPulsado;
+    private boolean pulsadoJugar;
     private String nickname;
     private MutableLiveData<Integer> saberBotonPulsado;
 
@@ -14,6 +15,7 @@ public class MainViewModel extends ViewModel {
         this.nickname = "";
         this.botonPulsado = 0;
         this.saberBotonPulsado = new MutableLiveData<>();
+        this.pulsadoJugar = false;
     }
 
     public int getBotonPulsado() {
@@ -47,5 +49,13 @@ public class MainViewModel extends ViewModel {
 
     public void setMonedas(int monedas) {
         this.monedas = monedas;
+    }
+
+    public boolean isPulsadoJugar() {
+        return pulsadoJugar;
+    }
+
+    public void setPulsadoJugar(boolean pulsadoJugar) {
+        this.pulsadoJugar = pulsadoJugar;
     }
 }

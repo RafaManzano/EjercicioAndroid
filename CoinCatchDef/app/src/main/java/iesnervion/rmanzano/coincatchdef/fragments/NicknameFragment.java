@@ -60,7 +60,7 @@ public class NicknameFragment extends Fragment implements View.OnClickListener{
 
             case R.id.cancelar:
                 et.setText(mainViewModel.getNickname());
-                mainViewModel.botonElegido(5);
+                mainViewModel.botonElegido(10);
                 break;
         }
     }

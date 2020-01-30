@@ -43,7 +43,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ImageButton dieciseis;
     private ImageButton diecisiete;
     private ImageButton dieciocho;
-    //private Button plantarse;
+    private Button plantarse;
     private Methods methods = new Methods();
     private ArrayList<Item> items = new ArrayList<>();
     private TextView monedasMostrar;
@@ -91,7 +91,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         dieciseis = v.findViewById(R.id.dieciseis);
         diecisiete = v.findViewById(R.id.diecisiete);
         dieciocho = v.findViewById(R.id.dieciocho);
-        //plantarse = v.findViewById(R.id.plantarse);
+        plantarse = v.findViewById(R.id.plantarse);
 
         //Para mostrar las monedas que estan capturadas
         monedasMostrar = v.findViewById(R.id.monedasgame);
@@ -115,7 +115,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         dieciseis.setOnClickListener(this);
         diecisiete.setOnClickListener(this);
         dieciocho.setOnClickListener(this);
-        //plantarse.setOnClickListener(this);
+        plantarse.setOnClickListener(this);
 
 
         //mainViewModel
@@ -126,36 +126,43 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         View view =  v;
 
+        if(v.getId() == R.id.plantarse) {
+            mainViewModel.setBotonPulsado(9);
+        }
+        else {
+            //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
+            view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
 
-        //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
-        view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
 
+            switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) {
 
-        switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) {
+                case R.drawable.moneda:
+                    mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
+                    break;
 
-            case R.drawable.moneda:
-                mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
-                break;
+                case R.drawable.agujeronegro:
+                    mainViewModel.setMonedas(0);
+                    mainViewModel.setBotonPulsado(6);
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
+                    break;
 
-            case R.drawable.agujeronegro:
-                mainViewModel.setMonedas(0);
-                mainViewModel.setBotonPulsado(6);
-                //getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
-                break;
+                case R.drawable.luna:
+                    //La luna no hace nada
+                    break;
 
-            case R.drawable.luna:
-                //La luna no hace nada
-                break;
+                case R.drawable.meteorito:
+                    mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
+                    break;
 
-            case R.drawable.meteorito:
-                mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
-                break;
+                case R.drawable.nave:
+                    mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
+                    break;
 
-            case R.drawable.nave:
-                mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
-                break;
+            }
 
         }
+
+
 
         if(mainViewModel.getMonedas() < 0) {
             mainViewModel.setMonedas(0);

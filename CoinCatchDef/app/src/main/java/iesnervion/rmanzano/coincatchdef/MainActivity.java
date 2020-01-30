@@ -49,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Integer pulsacion) {
                 switch (pulsacion) {
                     case 1:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
+                        if(mainViewModel.getNickname().equals("")) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame, nicknameFragment).commit();
+                            mainViewModel.setPulsadoJugar(true);
+                        }
+                        else {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
+                        }
                         break;
 
                     case 2:
@@ -66,10 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
                     case 4:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, nicknameFragment).commit();
+
+
                         break;
 
                     case 5:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
+                        if(mainViewModel.isPulsadoJugar()) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
+                            mainViewModel.setPulsadoJugar(false);
+                        }
+                        else {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
+                        }
                         break;
 
                     case 6:
@@ -84,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
                     case 8:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
                         break;
+
+                    case 9:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, finishFragment).commit();
+                        break;
+
+                    case 10:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
+                        break;
                 }
 
             }
@@ -91,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void plantarse(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame, finishFragment).commit();
-    }
+    /*public void plantarse(View view) {
+
+    }*/
 }
 
