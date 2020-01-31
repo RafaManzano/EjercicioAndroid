@@ -10,24 +10,24 @@ import iesnervion.rmanzano.coincatchdef.classes.Item;
 public class Methods {
     public ArrayList<Item> listadeItems() {
         ArrayList<Item> items = new ArrayList<>();
-        items.add(new Item(0, R.drawable.agujeronegro, "final"));
-        items.add(new Item(1, R.drawable.agujeronegro, "final"));
-        items.add(new Item(2, R.drawable.meteorito, "menos"));
-        items.add(new Item(3, R.drawable.meteorito, "menos"));
-        items.add(new Item(4, R.drawable.meteorito, "menos"));
-        items.add(new Item(5, R.drawable.meteorito, "menos"));
-        items.add(new Item(6, R.drawable.nave, "multiplicador"));
-        items.add(new Item(7, R.drawable.nave, "multiplicador"));
-        items.add(new Item(8, R.drawable.luna, "vacio"));
-        items.add(new Item(9, R.drawable.luna, "vacio"));
-        items.add(new Item(10, R.drawable.luna, "vacio"));
-        items.add(new Item(11, R.drawable.moneda, "moneda"));
-        items.add(new Item(12, R.drawable.moneda, "moneda"));
-        items.add(new Item(13, R.drawable.moneda, "moneda"));
-        items.add(new Item(14, R.drawable.moneda, "moneda"));
-        items.add(new Item(15, R.drawable.moneda, "moneda"));
-        items.add(new Item(16, R.drawable.moneda, "moneda"));
-        items.add(new Item(17, R.drawable.moneda, "moneda"));
+        items.add(new Item(0, R.drawable.ic_agujeronegro, "final"));
+        items.add(new Item(1, R.drawable.ic_agujeronegro, "final"));
+        items.add(new Item(2, R.drawable.ic_meteorito, "menos"));
+        items.add(new Item(3, R.drawable.ic_meteorito, "menos"));
+        items.add(new Item(4, R.drawable.ic_meteorito, "menos"));
+        items.add(new Item(5, R.drawable.ic_meteorito, "menos"));
+        items.add(new Item(6, R.drawable.ic_cohete, "multiplicador"));
+        items.add(new Item(7, R.drawable.ic_cohete, "multiplicador"));
+        items.add(new Item(8, R.drawable.ic_luna, "vacio"));
+        items.add(new Item(9, R.drawable.ic_luna, "vacio"));
+        items.add(new Item(10, R.drawable.ic_luna, "vacio"));
+        items.add(new Item(11, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(12, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(13, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(14, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(15, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(16, R.drawable.ic_moneda, "moneda"));
+        items.add(new Item(17, R.drawable.ic_moneda, "moneda"));
         return items;
     }
 

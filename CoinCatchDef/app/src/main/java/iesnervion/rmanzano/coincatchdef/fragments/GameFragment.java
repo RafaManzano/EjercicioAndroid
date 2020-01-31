@@ -136,25 +136,25 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) {
 
-                case R.drawable.moneda:
+                case R.drawable.ic_moneda:
                     mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
                     break;
 
-                case R.drawable.agujeronegro:
+                case R.drawable.ic_agujeronegro:
                     mainViewModel.setMonedas(0);
                     mainViewModel.setBotonPulsado(6);
                     //getSupportFragmentManager().beginTransaction().replace(R.id.frame, finalizar).commit();
                     break;
 
-                case R.drawable.luna:
+                case R.drawable.ic_luna:
                     //La luna no hace nada
                     break;
 
-                case R.drawable.meteorito:
+                case R.drawable.ic_meteorito:
                     mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
                     break;
 
-                case R.drawable.nave:
+                case R.drawable.ic_cohete:
                     mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
                     break;
 

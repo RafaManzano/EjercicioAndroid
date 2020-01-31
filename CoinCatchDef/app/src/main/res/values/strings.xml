@@ -9,7 +9,7 @@
     <string name="puntuacion">SCORE</string>
     <string name="anonimo">Anonimous</string>
     <string name="info">HOW TO PLAY?</string>
-    <string name="change">CHOOSE/CHANGE NICKNAME</string>
+    <string name="change">CHANGE NICKNAME</string>
     <string name="aceptar">Accept</string>
     <string name="cancelar">Cancel</string>
 </resources>
