@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/alien"/>
+        android:src="@drawable/ic_alien"/>
 
     <TextView
         android:id="@+id/nickname"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/alien"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:text="NICKNAME:"
         app:layout_constraintTop_toTopOf="@id/alien"
         android:textColor="#fff"/>
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="30sp"
+        android:textSize="60sp"
         android:text="@string/monedas"
         android:layout_marginTop="50sp"
         app:layout_constraintLeft_toRightOf="@id/alien"
@@ -41,7 +41,7 @@
         android:textColor="#fff"/>
 
     <Button
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:id="@+id/terminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"/>
 
     <Button
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:id="@+id/repetir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
