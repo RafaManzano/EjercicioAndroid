@@ -140,6 +140,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             }
 
+            view.setClickable(false);
+
         }
 
         //Mostramos en la pantalla las monedas

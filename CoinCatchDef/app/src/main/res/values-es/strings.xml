@@ -12,4 +12,12 @@
     <string name="change">CAMBIAR NICKNAME</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="dialogo">
+        Hola cadete. Estas aqui porque necesito tu ayuda para llevar a cabo una mision importante. Tu objetivo es encontrar
+        el mayor numero de monedas posibles, pero ten cuidado, los meteoritos y agujeros negros haran mas dificil tu mision.
+        Si encuentras los cohetes estas de suerte, tus ganancias se duplicaran. Si te topas con la luna, tranquil@, solo esta
+        de espectadora. Ah, y recuerda, en todo momento puedes plantarte y quedarte con todas las monedas encontradas. Buena
+        suerte muchach@, la vas a necesitar
+    </string>
+    <string name="mision">Comprendo la mision</string>
 </resources>
