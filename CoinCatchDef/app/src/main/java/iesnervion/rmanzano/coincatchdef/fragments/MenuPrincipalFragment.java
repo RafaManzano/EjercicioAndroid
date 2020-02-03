@@ -19,7 +19,7 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
     private Button stats;
     private Button change;
     private Button info;
-    private MainViewModel mainViewModel;
+    private MainViewModel mainViewModel; //Para instanciar el viewModel
 
     public MenuPrincipalFragment() {
 
@@ -44,9 +44,11 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
         info = v.findViewById(R.id.info);
         stats = v.findViewById(R.id.estadisticas);
         change = v.findViewById(R.id.chNickname);
-        //CoinViewModel
+
+        //La instanciacion del viewModel
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
+        //SetonclickListener
         play.setOnClickListener(this);
         info.setOnClickListener(this);
         stats.setOnClickListener(this);
@@ -57,21 +59,19 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.jugar:
-                //mainViewModel.setNickname(et.getText().toString());
-                mainViewModel.setBotonPulsado(1);
+                mainViewModel.setBotonPulsado(1); //Enviamos a la actividad la pulsacion del boton "jugar"
                 break;
 
             case R.id.info:
-                mainViewModel.setBotonPulsado(2);
-                //mainViewModel.botonElegido(1);
+                mainViewModel.setBotonPulsado(2); //Enviamos a la actividad la pulsacion del boton "info"
                 break;
 
             case R.id.estadisticas:
-                mainViewModel.setBotonPulsado(3);
+                mainViewModel.setBotonPulsado(3); //Enviamos a la actividad la pulsacion del boton "estadisiticas"
                 break;
 
             case R.id.chNickname:
-                mainViewModel.setBotonPulsado(4);
+                mainViewModel.setBotonPulsado(4); //Enviamos a la actividad la pulsacion del boton "cambioNickname"
                 break;
         }
     }
