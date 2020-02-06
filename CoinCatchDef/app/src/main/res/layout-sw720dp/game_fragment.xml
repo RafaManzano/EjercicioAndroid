@@ -261,7 +261,7 @@
         android:textColor="#F44611"
         android:text="@string/plantarse" />
 
-    <ImageView
+    <ImageButton
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:id="@+id/efectosGame"
@@ -270,9 +270,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_efectos"
-        android:tint="#fff"/>
+        android:tint="#fff"
+        android:background="@android:color/transparent"/>
 
-    <ImageView
+    <ImageButton
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:id="@+id/musicaGame"
@@ -281,6 +282,7 @@
         android:src="@drawable/ic_musica"
         android:tint="#fff"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

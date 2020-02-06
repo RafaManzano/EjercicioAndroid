@@ -51,6 +51,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private MainViewModel mainViewModel;
     private MediaPlayer mediaplayer;
     private MediaPlayer soundplayer;
+    private ImageButton musica;
+    private ImageButton efecto;
 
 
     public GameFragment() {
@@ -100,45 +102,54 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         View view =  v;
 
-        if(v.getId() == R.id.plantarse) {
-            mainViewModel.setBotonPulsado(9); //Enviamos a la actividad la pulsacion del boton "plantarse"
+        switch (v.getId()) {
+            case R.id.plantarse:
+                mainViewModel.setBotonPulsado(9); //Enviamos a la actividad la pulsacion del boton "plantarse"
+                break;
+
+            case R.id.efectosGame:
+                mainViewModel.setBotonPulsado(12); //Enviamos a la actividad la pulsacion del boton "efectos"
+                break;
+
+            case R.id.musicaGame:
+                mainViewModel.setBotonPulsado(11); //Enviamos a la actividad la pulsacion del boton "musica"
+                break;
+
+            default:
+                //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
+                view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
+
+
+                switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) { //Dependiendo del tag que tiene cada imagen
+
+                    case R.drawable.ic_moneda:
+                        mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
+                        soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmoneda); //Sonido de moneda
+                        soundplayer.start();
+                        break;
+
+                    case R.drawable.ic_agujeronegro:
+                        mainViewModel.setMonedas(0); //Ponemos las monedas a 0
+                        mainViewModel.setBotonPulsado(6); //Enviamos a la actividad la pulsacion del boton "agujeroNegro"
+                        break;
+
+                    case R.drawable.ic_luna:
+                        soundplayer = MediaPlayer.create(getActivity(), R.raw.soundluna); //Sonido de luna
+                        soundplayer.start();
+                        break;
+
+                    case R.drawable.ic_meteorito:
+                        soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmeteorito); //Sonido de meteorito
+                        soundplayer.start();
+                        mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
+                        break;
+
+                    case R.drawable.ic_cohete:
+                        soundplayer = MediaPlayer.create(getActivity(), R.raw.soundnave2); //Sonido de nave
+                        soundplayer.start();
+                        mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
+                        break;
         }
-        else {
-            //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
-            view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
-
-
-            switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) { //Dependiendo del tag que tiene cada imagen
-
-                case R.drawable.ic_moneda:
-                    mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
-                    soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmoneda); //Sonido de moneda
-                    soundplayer.start();
-                    break;
-
-                case R.drawable.ic_agujeronegro:
-                    mainViewModel.setMonedas(0); //Ponemos las monedas a 0
-                    mainViewModel.setBotonPulsado(6); //Enviamos a la actividad la pulsacion del boton "agujeroNegro"
-                    break;
-
-                case R.drawable.ic_luna:
-                    soundplayer = MediaPlayer.create(getActivity(), R.raw.soundluna); //Sonido de luna
-                    soundplayer.start();
-                    break;
-
-                case R.drawable.ic_meteorito:
-                    soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmeteorito); //Sonido de meteorito
-                    soundplayer.start();
-                    mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
-                    break;
-
-                case R.drawable.ic_cohete:
-                    soundplayer = MediaPlayer.create(getActivity(), R.raw.soundnave2); //Sonido de nave
-                    soundplayer.start();
-                    mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
-                    break;
-
-            }
 
             view.setClickable(false);
 
@@ -198,6 +209,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         diecisiete = v.findViewById(R.id.diecisiete);
         dieciocho = v.findViewById(R.id.dieciocho);
         plantarse = v.findViewById(R.id.plantarse);
+        musica = v.findViewById(R.id.musicaGame);
+        efecto = v.findViewById(R.id.efectosGame);
+
     }
 
     /*
@@ -223,5 +237,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         diecisiete.setOnClickListener(this);
         dieciocho.setOnClickListener(this);
         plantarse.setOnClickListener(this);
+        musica.setOnClickListener(this);
+        efecto.setOnClickListener(this);
     }
 }

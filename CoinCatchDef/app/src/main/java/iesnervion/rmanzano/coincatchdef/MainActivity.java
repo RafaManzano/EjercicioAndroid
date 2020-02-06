@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import javax.xml.datatype.Duration;
 
 import iesnervion.rmanzano.coincatchdef.fragments.FinishFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.GameFragment;
@@ -106,15 +109,26 @@ public class MainActivity extends AppCompatActivity {
                     case 10:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
                         break;
+                        /*
+                        case 11:
+                            //Toast.makeText(getApplicationContext(), "Esta es la musica", Toast.LENGTH_LONG);
+                            mainViewModel.getIsMusica().observe(context, new Observer<Boolean>() {
+                                @Override
+                                public void onChanged(Boolean aBoolean) {
+
+                                }
+                            });
+                        break;
+                        case 12:
+                            Toast.makeText(getApplicationContext(), "Esta es el sonido", Toast.LENGTH_LONG);
+                        break;
+                        */
+
                 }
 
             }
         });
     }
 
-
-    /*public void plantarse(View view) {
-
-    }*/
 }
 
