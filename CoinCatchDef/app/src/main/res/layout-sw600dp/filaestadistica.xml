@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/puntuacion"
         android:textSize="25sp"
-        android:layout_width="40dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
