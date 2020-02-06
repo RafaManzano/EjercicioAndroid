@@ -7,6 +7,7 @@
     android:background="@drawable/cielo">
 
     <TextView
+        android:layout_marginLeft="15dp"
         android:id="@+id/contadormonedas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -249,7 +250,9 @@
         />
 
     <Button
-        android:textSize="40sp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="30sp"
         android:id="@+id/plantarse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

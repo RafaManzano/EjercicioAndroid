@@ -30,7 +30,7 @@
         app:backgroundTint="#fff"/>
 
     <Button
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:id="@+id/cancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"/>
 
     <Button
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:id="@+id/aceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
