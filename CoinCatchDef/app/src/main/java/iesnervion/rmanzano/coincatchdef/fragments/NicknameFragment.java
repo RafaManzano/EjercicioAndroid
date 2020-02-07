@@ -1,5 +1,7 @@
 package iesnervion.rmanzano.coincatchdef.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ public class NicknameFragment extends Fragment implements View.OnClickListener{
     private Button aceptar;
     private Button cancelar;
     private MainViewModel mainViewModel;
+    SharedPreferences shared;
+    SharedPreferences.Editor edit;
 
     public NicknameFragment() {
 
@@ -40,7 +44,10 @@ public class NicknameFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
+        shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+        edit = shared.edit();
         et = v.findViewById(R.id.editNick);
+        et.setText(shared.getString("Nickname", ""));
         aceptar = v.findViewById(R.id.aceptar);
         cancelar = v.findViewById(R.id.cancelar);
         aceptar.setOnClickListener(this);
@@ -55,6 +62,8 @@ public class NicknameFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.aceptar:
                 mainViewModel.setNickname(et.getText().toString());
+                edit.putString("Nickname", et.getText().toString());
+                edit.apply();
                 mainViewModel.botonElegido(5);
                 break;
 

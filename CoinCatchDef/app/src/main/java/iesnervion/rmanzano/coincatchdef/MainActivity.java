@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private GameFragment gameFragment;
     private Intent intent;
     private Context context;
+    SharedPreferences shared;
+    SharedPreferences.Editor edit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
 
+        shared = this.getSharedPreferences("shared", Context.MODE_PRIVATE);
+        edit = shared.edit();
+
         //Aqui decide que hace cada boton del fragmento (1 jugar, 2 info, 3 estadististicas, 4 cambio nombre, 5 cerrar nombre fragment, 6 Agujero Negro, 7 Repetir juego, 8 Terminar Juego)
         mainViewModel.getSaberBotonPulsado().observe(this, new Observer<Integer>() {
             @Override
@@ -52,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Integer pulsacion) {
                 switch (pulsacion) {
                     case 1:
-                        if(mainViewModel.getNickname().equals("")) {
+                        if(shared.getString("Nickname", "").equals("")) {
                             getSupportFragmentManager().beginTransaction().replace(R.id.frame, nicknameFragment).commit();
                             mainViewModel.setPulsadoJugar(true);
                         }
                         else {
+                            mainViewModel.setNickname(shared.getString("Nickname", ""));
                             getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
                         }
                         break;
@@ -75,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
                     case 4:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, nicknameFragment).commit();
-
-
                         break;
 
                     case 5:
@@ -94,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 7:
-                        //mainViewModel.setMonedas(0);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
                         break;
 
@@ -109,21 +114,6 @@ public class MainActivity extends AppCompatActivity {
                     case 10:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
                         break;
-                        /*
-                        case 11:
-                            //Toast.makeText(getApplicationContext(), "Esta es la musica", Toast.LENGTH_LONG);
-                            mainViewModel.getIsMusica().observe(context, new Observer<Boolean>() {
-                                @Override
-                                public void onChanged(Boolean aBoolean) {
-
-                                }
-                            });
-                        break;
-                        case 12:
-                            Toast.makeText(getApplicationContext(), "Esta es el sonido", Toast.LENGTH_LONG);
-                        break;
-                        */
-
                 }
 
             }

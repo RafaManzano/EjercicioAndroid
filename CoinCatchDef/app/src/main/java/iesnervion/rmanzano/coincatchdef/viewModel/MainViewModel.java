@@ -8,21 +8,17 @@ public class MainViewModel extends ViewModel {
     private int botonPulsado;
     private boolean pulsadoJugar;
     private String nickname;
-    private boolean musica;
-    private boolean sonido;
     private MutableLiveData<Integer> saberBotonPulsado;
-    private MutableLiveData<Boolean> isMusica;
-    private MutableLiveData<Boolean> isSonido;
+    private MutableLiveData<Boolean> musica;
+    private boolean sonido;
 
     public MainViewModel() {
         this.monedas = 0;
         this.nickname = "";
         this.botonPulsado = 0;
-        this.musica = true;
-        this.sonido = true;
         this.saberBotonPulsado = new MutableLiveData<>();
-        this.isMusica = new MutableLiveData<>();
-        this.isSonido = new MutableLiveData<>();
+        this.musica = new MutableLiveData<>();
+        this.sonido = true;
         this.pulsadoJugar = false;
     }
 
@@ -67,13 +63,12 @@ public class MainViewModel extends ViewModel {
         this.pulsadoJugar = pulsadoJugar;
     }
 
-    public boolean isMusica() {
+    public MutableLiveData<Boolean> getMusica() {
         return musica;
     }
 
-    public void setMusica(boolean musica) {
-        this.musica = musica;
-        cambioMusica(musica);
+    public void cambiarMusica(boolean musica) {
+        this.musica.setValue(musica);
     }
 
     public boolean isSonido() {
@@ -82,22 +77,7 @@ public class MainViewModel extends ViewModel {
 
     public void setSonido(boolean sonido) {
         this.sonido = sonido;
-        cambioSonido(sonido);
-    }
-
-    public MutableLiveData<Boolean> getIsMusica() {
-        return isMusica;
-    }
-
-    public MutableLiveData<Boolean> getIsSonido() {
-        return isSonido;
-    }
-
-    public void cambioMusica(Boolean decision) {
-        isMusica.setValue(decision);
-    }
-
-    public void cambioSonido(Boolean decision) {
-        isSonido.setValue(decision);
     }
 }
+
+

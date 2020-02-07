@@ -5,8 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -53,6 +56,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private MediaPlayer soundplayer;
     private ImageButton musica;
     private ImageButton efecto;
+    SharedPreferences shared;
+    SharedPreferences.Editor edit;
+
 
 
     public GameFragment() {
@@ -69,11 +75,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.game_fragment, container, false);
+
+
+
         return v;
     }
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
+        //Con estos metodo ejecutamos el sharedPreferences e instanciamos el icono que queremos mostrar
+        shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+        edit = shared.edit();
+        musica = v.findViewById(R.id.musicaGame);
+        musica.setImageResource(shared.getInt("FotoMusica", 0));
+        efecto = v.findViewById(R.id.efectosGame);
+        efecto.setImageResource(shared.getInt("FotoEfecto", 0));
+
         //Para crear las imagenes y la logica del juego
         items = methods.randomizarLista(methods.listadeItems());
 
@@ -94,7 +111,40 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         //Musica de fondo
         mediaplayer = MediaPlayer.create(getActivity(), R.raw.cancionfondo);
         mediaplayer.setVolume(0.3f, 0.3f); //Con esto le ponemos un volumen mas bajo para que suene mas alto los sonidos
-        mediaplayer.start(); //Iniciamos la musica
+        mainViewModel.cambiarMusica(shared.getBoolean("Musica", true));
+
+        //El observador para el cambio de la musica
+        mainViewModel.getMusica().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(Boolean musica) {
+                //Se usa el adaptador
+                if(musica) {
+                    mediaplayer = MediaPlayer.create(getActivity(), R.raw.cancionfondo);
+                    mediaplayer.start();
+                }
+                else {
+                    mediaplayer.stop();
+                }
+            }
+        });
+
+        //El observador para el cambio de la sonido
+        /* PIENSO QUE NO ME ES NECESARIO, PUESTO QUE EL CAMBIO NO VA EN TIEMPO REAL
+        mainViewModel.getSonido().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(Boolean sonido) {
+                //Se usa el adaptador
+                if(sonido) {
+                    soundplayer.start();
+                }
+            }
+        });
+        */
+
+
+
 
     }
 
@@ -102,30 +152,60 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         View view =  v;
 
-        switch (v.getId()) {
-            case R.id.plantarse:
+        switch (view.getId()) { //Con este switch controlamos aquellos que no son los planetas
+            case R.id.plantarse: //Boton plantarse
                 mainViewModel.setBotonPulsado(9); //Enviamos a la actividad la pulsacion del boton "plantarse"
                 break;
 
-            case R.id.efectosGame:
-                mainViewModel.setBotonPulsado(12); //Enviamos a la actividad la pulsacion del boton "efectos"
+            case R.id.musicaGame: //Boton musicaGame
+                if(musica.getTag().toString().equals("musica")) {
+                    musica.setImageResource(R.drawable.ic_musicamuted);
+                    musica.setTag("musicamuted");
+                    edit.putBoolean("Musica", false);
+                    edit.putInt("FotoMusica", R.drawable.ic_musicamuted);
+                    edit.apply();
+                    mainViewModel.cambiarMusica(shared.getBoolean("Musica", true));
+                }
+                else {
+                    musica.setImageResource(R.drawable.ic_musica);
+                    musica.setTag("musica");
+                    edit.putBoolean("Musica", true);
+                    edit.putInt("FotoMusica", R.drawable.ic_musica);
+                    edit.apply();
+                    mainViewModel.cambiarMusica(shared.getBoolean("Musica", true));
+
+                }
                 break;
 
-            case R.id.musicaGame:
-                mainViewModel.setBotonPulsado(11); //Enviamos a la actividad la pulsacion del boton "musica"
+            case R.id.efectosGame: //Boton efectosGame
+                if(efecto.getTag().toString().equals("efecto")) {
+                    efecto.setImageResource(R.drawable.ic_efectomuted);
+                    efecto.setTag("efectomuted");
+                    edit.putBoolean("Efecto", false);
+                    edit.putInt("FotoEfecto", R.drawable.ic_efectomuted);
+                    mainViewModel.setSonido(false);
+                    edit.apply();
+                }
+                else {
+                    efecto.setImageResource(R.drawable.ic_efectos);
+                    efecto.setTag("efecto");
+                    edit.putBoolean("Efecto", true);
+                    edit.putInt("FotoEfecto", R.drawable.ic_efectos);
+                    mainViewModel.setSonido(true);
+                    edit.apply();
+                }
                 break;
 
-            default:
-                //Con la lista de elementos que antes hemos cargado y la clase Item elegimos la imagen para mostrar
+            default: //Aquellos que no son los botones anteriores (Basicamente los planetas)
                 view.setBackgroundResource(items.get(Integer.parseInt(view.getTag().toString())).getImagen());
-
 
                 switch (items.get(Integer.parseInt(view.getTag().toString())).getImagen()) { //Dependiendo del tag que tiene cada imagen
 
                     case R.drawable.ic_moneda:
                         mainViewModel.setMonedas(mainViewModel.getMonedas() + 5);
                         soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmoneda); //Sonido de moneda
-                        soundplayer.start();
+                        //mainViewModel.cambiarSonido(isSonido);
+                        empezarSonido();
                         break;
 
                     case R.drawable.ic_agujeronegro:
@@ -135,24 +215,30 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
                     case R.drawable.ic_luna:
                         soundplayer = MediaPlayer.create(getActivity(), R.raw.soundluna); //Sonido de luna
-                        soundplayer.start();
+                        empezarSonido();
+                        //mainViewModel.cambiarSonido(isSonido);
+
                         break;
 
                     case R.drawable.ic_meteorito:
                         soundplayer = MediaPlayer.create(getActivity(), R.raw.soundmeteorito); //Sonido de meteorito
-                        soundplayer.start();
+                        empezarSonido();
+                        //mainViewModel.cambiarSonido(isSonido);
+
                         mainViewModel.setMonedas(mainViewModel.getMonedas() - 3);
                         break;
 
                     case R.drawable.ic_cohete:
                         soundplayer = MediaPlayer.create(getActivity(), R.raw.soundnave2); //Sonido de nave
-                        soundplayer.start();
+                        empezarSonido();
+                        //mainViewModel.cambiarSonido(isSonido);
+
                         mainViewModel.setMonedas(mainViewModel.getMonedas() * 2);
                         break;
-        }
+                }
 
-            view.setClickable(false);
-
+                view.setClickable(false);
+                break;
         }
 
         //Mostramos en la pantalla las monedas
@@ -183,6 +269,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         mediaplayer.start();
+
 
     }
 
@@ -240,4 +327,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         musica.setOnClickListener(this);
         efecto.setOnClickListener(this);
     }
+
+
+    public void empezarSonido() {
+        if(mainViewModel.isSonido()) {
+            soundplayer.start();
+        }
+    }
+
+
 }

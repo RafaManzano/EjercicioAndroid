@@ -22,8 +22,6 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
     private Button stats;
     private Button change;
     private Button info;
-    private ImageButton musica;
-    private ImageButton efecto;
     private MainViewModel mainViewModel; //Para instanciar el viewModel
 
 
@@ -50,8 +48,6 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
         info = v.findViewById(R.id.info);
         stats = v.findViewById(R.id.estadisticas);
         change = v.findViewById(R.id.chNickname);
-        musica = v.findViewById(R.id.musica);
-        efecto = v.findViewById(R.id.efectos);
 
         //La instanciacion del viewModel
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
@@ -61,10 +57,9 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
         info.setOnClickListener(this);
         stats.setOnClickListener(this);
         change.setOnClickListener(this);
-        musica.setOnClickListener(this);
-        efecto.setOnClickListener(this);
 
         //Observer para cambiar la imagen de la musica por la tachada
+        /*
         mainViewModel.getIsMusica().observe(this.getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -76,6 +71,7 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
                 }
             }
         });
+        */
     }
 
     @Override
@@ -96,17 +92,6 @@ public class MenuPrincipalFragment extends Fragment implements View.OnClickListe
             case R.id.chNickname:
                 mainViewModel.setBotonPulsado(4); //Enviamos a la actividad la pulsacion del boton "cambioNickname"
                 break;
-
-            case R.id.musica:
-                //Quedaria incluir para poder hacer el cambio, probablemente intente cambiar en el XML para facilitar
-                //la tarea. Android no ofrece directamente el cambio con lo actual
-                //Algunos dicen de guardalos en el tag, puede ser una solucion
-                break;
-
-            case R.id.efectos:
-                //mainViewModel.setBotonPulsado(12); //Enviamos a la actividad la pulsacion del boton "efectos"
-                break;
-
         }
     }
 }

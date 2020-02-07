@@ -270,7 +270,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_efectos"
         android:tint="#fff"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent"
+        android:tag="efecto"/>
 
     <ImageButton
         android:layout_marginTop="5dp"
@@ -282,6 +283,7 @@
         android:tint="#fff"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:tag="musica"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,11 +68,11 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
         //Con esto dependiendo de las monedas que tiene elegimos un sonido u otro
         if(mainViewModel.getMonedas() <= 0) {
             soundplayer = MediaPlayer.create(getActivity(), R.raw.ceromonedas);
-            soundplayer.start();
+            empezarSonido();
         }
         else {
             soundplayer = MediaPlayer.create(getActivity(), R.raw.masmonedas);
-            soundplayer.start();
+            empezarSonido();
         }
 
         //onclick
@@ -141,5 +141,10 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void empezarSonido() {
+        if(mainViewModel.isSonido()) {
+            soundplayer.start();
+        }
+    }
 
 }
