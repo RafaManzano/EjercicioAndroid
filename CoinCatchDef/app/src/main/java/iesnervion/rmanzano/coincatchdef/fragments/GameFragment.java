@@ -87,9 +87,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         edit = shared.edit();
         musica = v.findViewById(R.id.musicaGame);
-        musica.setImageResource(shared.getInt("FotoMusica", 0));
+        musica.setImageResource(shared.getInt("FotoMusica", R.drawable.ic_musica));
         efecto = v.findViewById(R.id.efectosGame);
-        efecto.setImageResource(shared.getInt("FotoEfecto", 0));
+        efecto.setImageResource(shared.getInt("FotoEfecto", R.drawable.ic_efectos));
 
         //Para crear las imagenes y la logica del juego
         items = methods.randomizarLista(methods.listadeItems());
@@ -142,10 +142,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             }
         });
         */
-
-
-
-
     }
 
     @Override

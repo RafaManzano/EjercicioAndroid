@@ -56,7 +56,7 @@ public class StatisticsActivity extends AppCompatActivity {
         vm = ViewModelProviders.of(this).get(StatsViewModel.class);
 
         //stats.orderBy("Score", Query.Direction.ASCENDING).limit(100);
-        db.collection("Stats").orderBy("Score", Query.Direction.DESCENDING).limit(100)
+        db.collection("Stats").orderBy("Score", Query.Direction.DESCENDING).limit(50)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

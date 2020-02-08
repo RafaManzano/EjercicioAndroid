@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,9 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
     private MainViewModel mainViewModel; //Para instanciar el viewModel
     private MediaPlayer soundplayer; //Para los sonidos
 
+    //SharedPreferences
+    SharedPreferences shared;
+
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -54,6 +59,9 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View v, Bundle savedInstanceState) {
         //La instancia del viewModel
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
+        //SharedPreferences
+        shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
 
         terminar = v.findViewById(R.id.terminar);
         repetir = v.findViewById(R.id.repetir);
@@ -142,7 +150,7 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
     }
 
     public void empezarSonido() {
-        if(mainViewModel.isSonido()) {
+        if(shared.getBoolean("Efecto", true)) {
             soundplayer.start();
         }
     }
