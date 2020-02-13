@@ -1,19 +1,15 @@
 package iesnervion.rmanzano.coincatchdef;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
-import javax.xml.datatype.Duration;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import iesnervion.rmanzano.coincatchdef.fragments.FinishFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.GameFragment;
