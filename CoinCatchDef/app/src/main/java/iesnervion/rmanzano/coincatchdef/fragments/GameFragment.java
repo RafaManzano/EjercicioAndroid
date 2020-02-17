@@ -1,13 +1,5 @@
 package iesnervion.rmanzano.coincatchdef.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -17,8 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 
@@ -83,6 +80,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
+        //mainViewModel
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
         //Con estos metodo ejecutamos el sharedPreferences e instanciamos el icono que queremos mostrar
         shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         edit = shared.edit();
@@ -90,6 +90,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         musica.setImageResource(shared.getInt("FotoMusica", R.drawable.ic_musica));
         efecto = v.findViewById(R.id.efectosGame);
         efecto.setImageResource(shared.getInt("FotoEfecto", R.drawable.ic_efectos));
+        if(shared.getInt("FotoEfecto", R.drawable.ic_efectos) == R.drawable.ic_efectomuted) {
+            efecto.setTag("efectomuted");
+            edit.putBoolean("Efecto", false);
+            edit.putInt("FotoEfecto", R.drawable.ic_efectomuted);
+            mainViewModel.setSonido(false);
+            edit.apply();
+        }
+        else {
+            efecto.setImageResource(R.drawable.ic_efectos);
+            efecto.setTag("efecto");
+            edit.putBoolean("Efecto", true);
+            edit.putInt("FotoEfecto", R.drawable.ic_efectos);
+            mainViewModel.setSonido(true);
+            edit.apply();
+        }
+
 
         //Para crear las imagenes y la logica del juego
         items = methods.randomizarLista(methods.listadeItems());
@@ -105,8 +121,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         todosclicks();
 
 
-        //mainViewModel
-        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
 
         //Musica de fondo
         mediaplayer = MediaPlayer.create(getActivity(), R.raw.cancionfondo);

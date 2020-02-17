@@ -19,6 +19,7 @@ import iesnervion.rmanzano.coincatchdef.fragments.NicknameFragment;
 import iesnervion.rmanzano.coincatchdef.viewModel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     private MenuPrincipalFragment menuPrincipalFragment;
     private MainViewModel mainViewModel;
     private NicknameFragment nicknameFragment;
