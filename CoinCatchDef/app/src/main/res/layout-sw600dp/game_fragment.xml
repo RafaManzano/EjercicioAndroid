@@ -269,7 +269,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_efectos"
         android:tint="#fff"
         android:background="@android:color/transparent"
         android:tag="efecto"/>
@@ -280,11 +279,15 @@
         android:id="@+id/musicaGame"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@id/efectosGame"
-        android:src="@drawable/ic_musica"
         android:tint="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:tag="musica"/>
+
+    <!--
+    android:src="@drawable/ic_efectos"
+    android:src="@drawable/ic_musica"
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
