@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">CazaMonedas</string>
+    <string name="botonplay">JUGAR</string>
+    <string name="botonsta">ESTADÍSTICAS</string>
+    <string name="monedas">Monedas Capturadas:</string>
+    <string name="terminar">Terminar Juego</string>
+    <string name="repetir">Volver a Jugar</string>
+    <string name="plantarse">PLANTARSE</string>
+    <string name="puntuacion">PUNTUACIÓN</string>
+    <string name="anonimo">Anonimo</string>
+    <string name="info">CÓMO JUGAR?</string>
+    <string name="change">CAMBIAR NICKNAME</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="dialogo">
+        Hola cadete. Estás aquí porque necesito tu ayuda para llevar a cabo una misión importante. Tu objetivo es encontrar
+        el mayor número de monedas posibles, pero ten cuidado, los meteoritos y agujeros negros harán más difícil tu misión.
+        Si encuentras los cohetes estás de suerte, tus ganancias se duplicarán. Si te topas con la luna, tranquil@, solo está
+        de espectadora. Ah, y recuerda, en todo momento puedes plantarte y quedarte con todas las monedas encontradas. Buena
+        suerte muchach@, la vas a necesitar.
+    </string>
+    <string name="mision">Comprendo la misión</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-7562069808460151/9835904833</string>
+</resources>

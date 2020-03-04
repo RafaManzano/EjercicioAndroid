@@ -1,0 +1,76 @@
+package iesnervion.rmanzano.coincatchdef.fragments;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
+import iesnervion.rmanzano.coincatchdef.R;
+import iesnervion.rmanzano.coincatchdef.viewModel.MainViewModel;
+
+public class NicknameFragment extends Fragment implements View.OnClickListener{
+    private EditText et;
+    private Button aceptar;
+    private Button cancelar;
+    private MainViewModel mainViewModel;
+    SharedPreferences shared;
+    SharedPreferences.Editor edit;
+
+    public NicknameFragment() {
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //return super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_nickname, container, false);
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View v, Bundle savedInstanceState) {
+        shared = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
+        edit = shared.edit();
+        et = v.findViewById(R.id.editNick);
+        et.setText(shared.getString("Nickname", ""));
+        aceptar = v.findViewById(R.id.aceptar);
+        cancelar = v.findViewById(R.id.cancelar);
+        aceptar.setOnClickListener(this);
+        cancelar.setOnClickListener(this);
+
+        //mainViewModel
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.aceptar:
+                mainViewModel.setNickname(et.getText().toString());
+                edit.putString("Nickname", et.getText().toString());
+                edit.apply();
+                mainViewModel.botonElegido(5);
+                break;
+
+            case R.id.cancelar:
+                et.setText(mainViewModel.getNickname());
+                mainViewModel.botonElegido(10);
+                break;
+        }
+    }
+}
