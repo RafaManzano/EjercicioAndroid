@@ -20,4 +20,7 @@
         found, Good luck, you are going to need it.
     </string>
     <string name="mision">I understand the mission</string>
+    <string name="hard">Hard</string>
+    <string name="normal">Normal</string>
+    <string name="easy">Easy</string>
 </resources>

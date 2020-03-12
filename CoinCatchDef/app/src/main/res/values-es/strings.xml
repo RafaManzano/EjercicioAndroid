@@ -20,4 +20,7 @@
         suerte muchach@, la vas a necesitar.
     </string>
     <string name="mision">Comprendo la misión</string>
+    <string name="hard">Difícil</string>
+    <string name="normal">Normal</string>
+    <string name="easy">Fácil</string>
 </resources>

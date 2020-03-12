@@ -11,6 +11,7 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> saberBotonPulsado;
     private MutableLiveData<Boolean> musica;
     private boolean sonido;
+    private String level;
 
     public MainViewModel() {
         this.monedas = 0;
@@ -20,6 +21,7 @@ public class MainViewModel extends ViewModel {
         this.musica = new MutableLiveData<>();
         this.sonido = true;
         this.pulsadoJugar = false;
+        this.level = "";
     }
 
     public int getBotonPulsado() {
@@ -77,6 +79,14 @@ public class MainViewModel extends ViewModel {
 
     public void setSonido(boolean sonido) {
         this.sonido = sonido;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
     }
 }
 

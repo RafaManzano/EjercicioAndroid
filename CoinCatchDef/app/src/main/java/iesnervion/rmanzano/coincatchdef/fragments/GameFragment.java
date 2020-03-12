@@ -108,7 +108,21 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
 
         //Para crear las imagenes y la logica del juego
-        items = methods.randomizarLista(methods.listadeItems());
+        //Aqui definimos los niveles
+        switch (mainViewModel.getLevel()) {
+            case "facil":
+                items = methods.listadeItemsFacil();
+                break;
+
+            case "normal":
+                items = methods.listadeItemsNormal();
+                break;
+
+            case "dificil":
+                items = methods.listadeItemsDificil();
+                break;
+        }
+        items = methods.randomizarLista(items);
 
         //Los finds de los botones (18)
         todosfinds(v);

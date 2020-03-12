@@ -11,10 +11,12 @@ import iesnervion.rmanzano.coincatchdef.classes.Stats;
 public class StatsViewModel extends ViewModel {
     private ArrayList<Stats> stats = new ArrayList<>();
     private MutableLiveData<ArrayList<Stats>> mutableStats;
+    private MutableLiveData<String> mutableLevel;
 
     public StatsViewModel() {
         stats = new ArrayList<>();
         mutableStats = new MutableLiveData<>();
+        mutableLevel = new MutableLiveData<>();
     }
 
     public ArrayList<Stats> getStats() {
@@ -35,5 +37,13 @@ public class StatsViewModel extends ViewModel {
 
     public void cargarListaEstadistica(ArrayList<Stats> stats) {
         mutableStats.setValue(stats);
+    }
+
+    public MutableLiveData<String> getLevel() {
+        return mutableLevel;
+    }
+
+    public void cambiarLevel(String level) {
+        mutableLevel.setValue(level);
     }
 }

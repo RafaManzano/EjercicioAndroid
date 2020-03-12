@@ -1,10 +1,5 @@
 package iesnervion.rmanzano.coincatchdef;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,19 +26,20 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-
 import iesnervion.rmanzano.coincatchdef.classes.Stats;
 import iesnervion.rmanzano.coincatchdef.viewModel.StatsViewModel;
 
-public class StatisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity implements OnCheckedChangeListener {
     private ArrayList<Stats> stats;
     private ListView listEstadisitica;
     private StatsViewModel vm;
+    private String level;
 
 
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private android.widget.RadioGroup radio;
 
     //CollectionReference stats = db.collection("Stats");
 
@@ -50,29 +53,39 @@ public class StatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistics);
         stats = new ArrayList<>();
         listEstadisitica = findViewById(R.id.lista);
+        radio = findViewById(R.id.radiogroup);
+        radio.setOnCheckedChangeListener(this);
+
         //Adaptador adapter = new Adaptador(stats);
 
         //CoinViewModel
         vm = ViewModelProviders.of(this).get(StatsViewModel.class);
 
         //stats.orderBy("Score", Query.Direction.ASCENDING).limit(100);
-        db.collection("Stats").orderBy("Score", Query.Direction.DESCENDING).limit(50)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Funciona", document.getId() + " => " + document.getData());
-                                stats.add(new Stats(document.getData().get("Nickname").toString(), Integer.parseInt(document.getData().get("Score").toString())));
-                                //Aqui hacemos MutableLiveData para que cuando venga la informacion la muestre en el listado
+
+        vm.getLevel().observe(this, new Observer<String>() {
+            @Override
+            //Si entra en este metodo quiere decir que hay un cambio para notificar
+            public void onChanged(String level) {
+                db.collection("Stats").whereEqualTo("Level", level).orderBy("Score", Query.Direction.DESCENDING).limit(50)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("Funciona", document.getId() + " => " + document.getData());
+                                        stats.add(new Stats(document.getData().get("Nickname").toString(), Integer.parseInt(document.getData().get("Score").toString())));
+                                        //Aqui hacemos MutableLiveData para que cuando venga la informacion la muestre en el listado
+                                    }
+                                    vm.cargarListaEstadistica(stats);
+                                } else {
+                                    Log.w("Error", "Error getting documents.", task.getException());
+                                }
                             }
-                            vm.cargarListaEstadistica(stats);
-                        } else {
-                            Log.w("Error", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+                        });
+            }
+        });
 
 
         //Con esto se muestra la lista despues de que sea cargada
@@ -86,6 +99,23 @@ public class StatisticsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (i) {
+            case R.id.rFacil:
+                vm.cambiarLevel("facil");
+                break;
+
+            case R.id.rNormal:
+                vm.cambiarLevel("normal");
+                break;
+
+            case R.id.rDificil:
+                vm.cambiarLevel("dificil");
+                break;
+        }
     }
 
         /*

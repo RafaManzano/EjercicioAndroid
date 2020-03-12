@@ -1,10 +1,5 @@
 package iesnervion.rmanzano.coincatchdef.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -15,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -130,6 +130,7 @@ public class FinishFragment extends Fragment implements View.OnClickListener {
         recogerNick();
         data.put("Nickname", nickname.getText().toString());
         data.put("Score", mainViewModel.getMonedas());
+        data.put("Level", mainViewModel.getLevel());
 
         if(mainViewModel.getMonedas() > 0) { //En el caso de que sea 0 no se introducira
             db.collection("Stats")

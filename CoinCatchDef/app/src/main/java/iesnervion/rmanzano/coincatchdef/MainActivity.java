@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import iesnervion.rmanzano.coincatchdef.fragments.FinishFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.GameFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.InfoDialogFragment;
+import iesnervion.rmanzano.coincatchdef.fragments.LevelFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.MenuPrincipalFragment;
 import iesnervion.rmanzano.coincatchdef.fragments.NicknameFragment;
 import iesnervion.rmanzano.coincatchdef.viewModel.MainViewModel;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private NicknameFragment nicknameFragment;
     private FinishFragment finishFragment;
     private GameFragment gameFragment;
+    private LevelFragment levelFragment;
     private Intent intent;
     private Context context;
     SharedPreferences shared;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         nicknameFragment = new NicknameFragment();
         gameFragment = new GameFragment();
         finishFragment = new FinishFragment();
+        levelFragment = new LevelFragment();
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         context = this;
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             mainViewModel.setNickname(shared.getString("Nickname", ""));
                             getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
                         }
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, levelFragment).commit();
                         break;
 
                     case 2:
@@ -110,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case 10:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame, menuPrincipalFragment).commit();
+                        break;
+
+                    case 11:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, gameFragment).commit();
                         break;
                 }
 
